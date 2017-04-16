@@ -1,0 +1,20 @@
+1. github, git常用命令， github hexo博客
+
+  git add 
+  git status
+  git commit -m “注释”
+  git clone 项目地址 https://www.baitfjowjfowe.git
+  git pull 获取到本地
+  git push  推送到服务器
+  git checkout —- . 还原某些文件修改， 点代表
+
+2. 尽量命令行工作
+3. 写博客， http://luckyxutao.github.io/demos/
+
+
+
+4. node环境 nodejs 安装包 npm
+5. linux(mac) 命令行操作，
+
+主线：
+  前端技术路线 

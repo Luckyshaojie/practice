@@ -1,0 +1,741 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--ios中是否隐藏状态栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--ios中 顶部nav的样式 为黑色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>视频详情页</title>
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <script type="text/javascript" src="js/mui.zoom.js"></script>
+    <script type="text/javascript" src="js/mui.previewimage.js"></script>
+    <!--自定义样式-->
+    <style type="text/css">
+        *{
+            font-family: '微软雅黑';
+        }
+        body{
+            background-color: #fff;
+        }
+        .mui-bar-nav {
+            top: 0;
+            -webkit-box-shadow: 0 0 0 #ccc;
+            /* box-shadow: 0 1px 6px #ccc; */
+        }
+        #header h1,#header a{
+            text-align: left
+        }
+        #zhuanjia img{
+            width: 45px;
+            height:45px;
+            vertical-align: middle;
+            border-radius: 100%;
+        }
+        #contentText{
+            padding-top: 3rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            font-size: 14px;
+        }
+
+        /* iphone4 5 */
+        @media screen and (min-width:320px) and (max-width:374px) {
+            #contentText{
+                padding-top: 3rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+                font-size: 14px;
+            }
+            #contentText img{
+                max-width: 100%;
+            }
+            #userName{
+                font-size: 12px;
+                font-weight: 500;
+                color: #0179fd;
+                text-align: center;
+            }
+            #ContentTitle{  /*发布文章标题*/
+                padding-left: 30px;
+                padding-right: 30px;
+                font-size: 18px;
+                display: block;
+                padding-bottom: 10px;
+                text-align: center;
+            }
+            #contentText h6{ /*发布文章日期*/
+                text-align: right;
+                padding-bottom: 5px;
+                margin-top: 1rem;
+            }
+
+            #zhuanjiaInfo h4{
+                font-size: 14px;
+
+            }
+
+            #footPs{
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 3rem;
+                font-size: 12px;
+                background-color: white;
+                line-height: 3rem;
+                border-top: 1px solid #c8c7cc;
+            }
+            #footPs .ic{
+                color: darkgrey;
+                font-size: 17px;
+            }
+            #DZ{
+                display: inline-block;
+                margin-left: 5px;
+                color: darkgrey;
+            }
+            #SC{
+                color: darkgrey;
+                margin-left: 10px;
+            }
+            #PLBtn img{
+                width: 1rem;
+                height: 17px;
+                vertical-align: middle;
+                margin-right: 3px;
+
+            }
+            #PLBtn{
+                display: inline-block;
+                border: 1px solid #bfbfbf;
+                width: 62%;
+                height: 1.8rem;
+                line-height: 1.8rem;
+                text-align: -webkit-center;
+                border-radius: 6px;
+                color: #bbbbbb;
+                margin: 0 5px;
+            }
+            #userPL{
+                border-top: 1px solid #efeff4;
+            }
+            .userName{
+                color: #1e67b6;
+                font-size: 13px;
+            }
+            .mui-ellipsis {
+                overflow: hidden;
+                white-space: inherit;
+                text-overflow: ellipsis;
+                word-break: break-all;
+                font-size: 14px;
+            }
+        }
+        /* iphone 6  6p*/
+        @media screen and (min-width:375px) and (max-width:2000px) {
+            #contentText img{
+                max-width: 100%;
+            }
+            #contentText{
+                padding-left: 1.5rem;
+                padding-right: 1.5rem;
+                font-size: 16px;
+            }
+            #userName{
+                font-size: 14px;
+                font-weight: 500;
+                color: #0179fd;
+                text-align: center;
+            }
+            #contentText h6{ /*发布文章日期*/
+                text-align: right;
+                padding-bottom: 5px;
+            }
+            #ContentTitle{
+                text-align: center;
+                padding-left: 30px;
+                padding-right: 30px;
+                font-size: 18px;
+                display: block;
+                padding-bottom: 6px;
+            }
+            #footPs{
+                position: fixed;
+                bottom: 0;
+                width: 100%;
+                height: 3rem;
+                font-size: 12px;
+                background-color: white;
+                line-height: 3rem;
+                border-top: 1px solid #c8c7cc;
+            }
+            #footPs .ic{
+                color: darkgrey;
+                font-size: 17px;
+            }
+            #DZ{
+                display: inline-block;
+                margin-left: 5px;
+                color: darkgrey;
+            }
+            #SC{
+                color: darkgrey;
+                margin-left: 10px;
+            }
+            #PLBtn img{
+                width: 1rem;
+                height: 17px;
+                vertical-align: middle;
+                margin-right: 3px;
+
+            }
+            #PLBtn{
+                display: inline-block;
+                border: 1px solid #bfbfbf;
+                width: 62%;
+                height: 1.8rem;
+                line-height: 1.8rem;
+                text-align: -webkit-center;
+                border-radius: 6px;
+                color: #bbbbbb;
+                margin: 0 5px;
+            }
+            #userPL{
+                border-top: 1px solid #efeff4;
+            }
+            .userName{
+                color: #1e67b6;
+                font-size: 16px;
+            }
+            .mui-ellipsis {
+                overflow: hidden;
+                white-space: inherit;
+                text-overflow: ellipsis;
+                word-break: break-all;
+                font-size: 17px;
+            }
+
+        }
+        #imgList img{
+            width: 30%;
+            height: 30%;
+            margin-left:1%;
+        }
+        #dzNum{
+            color: darkgrey;
+        }
+        #alert_Ly{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1999;
+
+        }
+        #contentText p{
+            text-align: center;
+            line-height: 10px;
+            font-weight: 500;
+            color: deeppink;
+            word-spacing: 15px;
+            word-break: break-all;
+        }
+        #pl{
+            position: relative;
+            margin-top: 20px;
+        }
+        #upImg{
+            position: absolute;
+            width: 30px;
+            top: -19px;
+            margin-left: 5%;
+        }
+        #pl  ul li{
+            position: relative;
+            cursor: pointer;
+        }
+        .pltime{
+            font-size: 12px;
+            position: absolute;
+            right: 6%;
+            color: #999;
+        }
+        .mui-table-view .mui-media-object {
+            line-height: 30px;
+            max-width: 42px;
+            height: 30px;
+            margin-top: 5px;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+        }
+        #tanchuang{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 170px;
+            background-color: #fff;
+            padding-top: 1rem;
+            margin-top: -170px;
+            -moz-transition:all 0.3s; /* Firefox 4 */
+            -webkit-transition:all 0.3s; /* Safari and Chrome */
+            -o-transition:all 0.3s; /* Opera */
+            z-index: 1999;
+        }
+        #tanchuang textarea{
+            width:90%;
+            margin-left: 5%;
+            height: 100px;
+        }
+        #tanchuang button{
+            margin-right: 5%;
+        }
+        .mui-popup-buttons>span:nth-child(2){
+            color: red;
+            font-weight: 500;
+        }
+        .mui-toast-message{
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+    </style>
+    <!--App自定义的css-->
+    <style type="text/css">
+        .mui-preview-image.mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-preview-header,
+        .mui-preview-footer {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            z-index: 10;
+        }
+        .mui-preview-header {
+            height: 44px;
+            top: 0;
+        }
+        .mui-preview-footer {
+            height: 50px;
+            bottom: 0px;
+        }
+        .mui-preview-header .mui-preview-indicator {
+            display: block;
+            line-height: 25px;
+            color: #fff;
+            text-align: center;
+            margin: 15px auto 4px;
+            width: 70px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        .mui-preview-image {
+            display: none;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .mui-preview-image.mui-preview-in {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+        .mui-preview-image.mui-preview-out {
+            background: none;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+        .mui-zoom-scroller {
+            position: absolute;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            -webkit-backface-visibility: hidden;
+        }
+        .mui-zoom {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .mui-slider .mui-slider-group .mui-slider-item img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+            width: 100%;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+            display: inline-table;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .mui-preview-loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .mui-preview-loading.mui-active {
+            display: block;
+        }
+        .mui-preview-loading .mui-spinner-white {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+            height: 50px;
+            width: 50px;
+        }
+        .mui-preview-image img.mui-transitioning {
+            -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        #imgList img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" style="padding-left: 5px"></a>
+    <h1 class="mui-title">详情</h1>
+</header>
+<div id="contentText">
+    <h2  id="ContentTitle">
+        预防失眠第一期第八节
+    </h2>
+    <h4 id="userName" style=" ">陈蓉</h4>
+    <div id="contentBody" style="color: #8f8f94;">
+        视频简介：主讲人陈蓉，本视频为失眠十讲里的第八讲，详细为广大失眠患者讲解了如何预防失眠以及缓解失眠，失眠的根本原因是什么。
+        <video src="ppt.mp4" controls="controls" width="100%"></video>
+
+        <!--<hr/>
+                            <p>_ooOoo_</p>
+                           <p>o8888888o</p>
+                           <p>88" . "88</p>
+                          <p> (| -_- |)</p>
+                         <p>  O\  =  /O</p>
+                        <p>____/`-&#45;&#45;'\____</p>
+                        <p>.'  \\|     |//  `.</p>
+                    <p>/  \\|||  :  |||//  \</p>
+                    <p>/  _||||| -:- |||||-  \</p>
+                    <p>|   | \\\  -  /// |   |</p>
+                    <p>| \_|  ''\-&#45;&#45;/''  |   |</p>
+                    <p>\  .-\__  `-`  ___/-. /</p>
+                <p>___`. .'  /&#45;&#45;.&#45;&#45;\  `. . __</p>
+                <p>."" '<  `.___\_<|>_/___.'  >'"".</p>
+                <p>| | :  `- \`.;`\ _ /`;.`/ - ` : | |</p>
+                <p>\  \ `-.   \_ __\ /__ _/   .-` /  /</p>
+           <p>======`-.____`-.___\_____/___.-`____.-'======</p>
+              <p>              `=-&#45;&#45;='                        </p>
+           <p>^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</p>
+           <p>           佛祖保佑       永无BUG              </p>
+
+        <hr/>-->
+    </div>
+    <h6>发布于<span id="fabuDate">2017-01-12</span></h6>
+
+</div>
+<!--评论区-->
+<div id="pl">
+    <img src="img/sq_sanjiaotop.png" alt="" id="upImg" style="display: block;">
+    <div class="mui-card" style="margin-bottom: 5rem;">
+        <ul class="mui-table-view pllsit" style="background-color:#e6e6e6">
+            <!--<div id="dianzanList" style="display: block;">
+                &lt;!&ndash;点赞人&ndash;&gt;
+                <li class="mui-table-view-cell" id="zanlist">
+                    <span class="mui-icon-extra mui-icon-extra-heart" style="vertical-align: middle;color: #3c7abd;"></span>
+                    <span class="userName" data-uid="102">当前用户名</span>
+
+                </li>
+            </div>-->
+            <div id="userPL" style="display: block;">
+                <li class="mui-table-view-cell mui-media">
+                    <img class="mui-media-object mui-pull-left plheadimg" src="img/userImg.jpg">
+                    <div class="mui-media-body">
+                        <span class="userName">幸福</span>
+                        <span class="pltime">2017年3月2日 11:48</span>
+                        <p class="mui-ellipsis">asdaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                    </div>
+                </li>
+            </div>
+
+        </ul>
+
+    </div>
+</div>
+<footer id="footPs">
+    <!--评论-->
+    <span id="PLBtn"><img src="img/sq_pinglun2.png" alt=""/>写下你的评论</span>
+    <!--点赞-->
+			<span id="DZ">
+				<span class="mui-icon-extra mui-icon-extra-like ic"></span>
+				<b id="dzNum">12</b>
+			</span >
+    <!--收藏-->
+			<span id="SC">
+				<span class="mui-icon-extra mui-icon-extra-heart-filled ic"></span>
+				<b id="ssc">收藏</b>
+			</span>
+</footer>
+
+<!--弹框-->
+<div id="tanchuang" >
+    <textarea rows="3" cols="20" placeholder="回复张三:" autofocus="autofocus" id="plBox" ></textarea>
+    <div style="text-align:center;margin-top: -7px ">
+        <button type="button" class="mui-btn  quxiao" style="    color: #999;">取消</button>
+        <button type="button"  class="mui-btn mui-btn-success huifu">回复</button>
+    </div>
+</div>
+</body>
+<script>
+    /*关注*/
+    mui.init();
+    /*图片预览初始化*/
+    mui.previewImage();
+    /*给文章内所有img设置属性  是图片可以预览*/
+    window.onload=function(){
+        //....页面数据加载
+
+
+
+        //数据加载完毕时
+        $("#contentText img").attr("data-preview-src","");
+        $("#contentText img").attr("data-preview-group","1");
+    }
+
+    mui("#zhuanjia").on("tap","#gz",function(){
+        if($("#gz").html().toString().trim()=="+ 关 注"){
+            $("#gz").html("取消关注");
+            $("#gz").addClass("mui-btn-outlined");
+        }else{
+            $("#gz").html("+ 关 注");
+            $("#gz").removeClass("mui-btn-outlined");
+        }
+    })
+
+    /*点赞*/
+    mui("#footPs").on("tap","#DZ",function(){
+        if($("#dzNum")[0].style.color.toString()==""||$("#dzNum")[0].style.color.toString()=="darkgrey"){
+            $(this).find("span").css("color","#0179fd");
+            $(this).find("b").css("color","#0179fd");
+            $("#dzNum").html(parseInt($("#dzNum").html())+1);
+
+            /*$("#zanlist").append("<span class='userName' data-uid='102'> 当前用户名</span>");*/
+            mui.toast("+1")
+
+        }else{
+            $(this).find("span").css("color","darkgrey");
+            $(this).find("b").css("color","darkgrey");
+            $("#dzNum").html(parseInt($("#dzNum").html())-1);
+            /*$("#zanlist span").each(function(e){
+             /!*第一个元素不是点赞用户列表*!/
+             if(e!="0"){
+             if($(this).attr("data-uid")=="102"){
+             /!*删除当前元素*!/
+             $(this).remove();
+             return false;
+             }
+             }
+             })*/
+
+        }
+    })
+    /*收藏*/
+
+    mui("#footPs").on("tap","#SC",function(){
+        if($("#ssc")[0].style.color.toString()==""||$("#ssc")[0].style.color.toString()=="darkgrey"){
+            $(this).find("span").css("color","#fc2766");
+            $(this).find("b").css("color","#fc2766");
+        }else{
+            $(this).find("span").css("color","darkgrey");
+            $(this).find("b").css("color","darkgrey");
+
+        }
+    })
+
+    var mask = mui.createMask(function () {
+        $("#tanchuang").css("margin-top","-170px");
+    });//callback为用户点击蒙版时自动执行的回调；
+    mask.close();//显示遮罩
+    mui("#footPs").on("tap","#PLBtn",function(){
+        var thisDom =$(this);
+        /*当前点击是否是自己所说的*/
+        $("#tanchuang").css("margin-top","0px");
+        var  username="评论:";
+        $("#plBox").attr("placeholder",username);
+        mask.show();
+        /*解除回复按钮的点击事件*/
+        mui("#tanchuang").off("tap");
+        /*附加回复按钮的点击事件*/
+        $(".huifu").html("评论");
+        addpinglun(thisDom);
+
+        addquxiao();
+    })
+    function addpinglun(thisDom){
+        mui("#tanchuang").on("tap",".huifu",function(){
+            if( $("#plBox").val().toString().trim()==""){
+                mui.alert("评论失败！  原因评论的内容为空！");
+                $("#tanchuang").css("margin-top","-170px");
+                mask.close();
+                return;
+            };
+
+
+            $("#userPL").append("<li class='mui-table-view-cell mui-media'>"+
+                    " <img class='mui-media-object mui-pull-left plheadimg' src='img/userImg.jpg'>"+
+                    "<div class='mui-media-body'>"+
+                    "<span class='userName'>一点</span>"+
+                    "<span class='pltime' >"+getDate()+"</span>"+
+                    "<p class='mui-ellipsis'>"+$('#plBox').val()+"</p></div></li>");
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mui.toast("评论成功");
+            $("#pl>img:eq(0)").show();
+
+            $("#userPL").show();
+            mask.close();
+        });
+    }
+    addclickpl();
+    function addclickpl(){
+        mui("#userPL").on("tap","li",function(){
+            var thisDom =$(this);
+            /*当前点击是否是自己所说的*/
+            console.log($(this).find(".userName").html());
+            console.log($("#userName").html());
+            if($(this).find(".userName").html()==$("#userName").html()){
+                mui.confirm("你是要删除你的评论吗？",'提示',['取消','确认'],function(e){
+                    if(e.index=="1"){
+                        $(thisDom).remove();
+                        mui.toast("删除成功！");
+                    }
+                });
+                return false;
+            }
+            $("#tanchuang").css("margin-top","0px");
+            console.log();
+            var  username="回复"+$(this).find(".userName")[0].innerHTML+":";
+            $("#plBox").attr("placeholder",username);
+            mask.show();
+            /*解除回复按钮的点击事件*/
+            mui("#tanchuang").off("tap");
+            /*附加回复按钮的点击事件*/
+            $(".huifu").html("回复");
+            addhuifu(thisDom);
+            /*绑定回复框的取消事件*/
+            addquxiao();
+
+        })
+    }
+    /*回复按钮事件*/
+    function addhuifu(thisDom){
+        mui("#tanchuang").on("tap",".huifu",function(){
+            if( $("#plBox").val().toString().trim()==""){
+                mui.alert("回复失败！  原因：回复的内容为空！");
+                $("#tanchuang").css("margin-top","-170px");
+                mask.close();
+                return;
+            };
+            $(thisDom).after("<li class='mui-table-view-cell mui-media'>"+
+                    "<img class='mui-media-object mui-pull-left plheadimg' src='img/userImg.jpg'>"+
+                    "<div class='mui-media-body'>"+
+                    "<span class='userName'>"+$("#userName").html()+"</span> 回复"+
+                    "<span class='userName'>"+$(thisDom).find(".userName")[0].innerHTML+"</span>"+
+                    "<span class='pltime' >"+getDate()+"</span>"+
+                    "<p class='mui-ellipsis'>"+$('#plBox').val()+"</p></div></li>");
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mask.close();
+
+        });
+    }
+    function getDate(){
+        var mydate = new Date();
+        var time= mydate.getFullYear()+"年"+(mydate.getMonth()+1)+"月" +mydate.getDate()+"日 "; //获取当前日(1-31)
+        time+= mydate.getHours()+":"; //获取当前小时数(0-23)
+        time+=(mydate.getMinutes().length!=1?mydate.getMinutes():"0"+mydate.getMinutes())+""; //获取当前分钟数(0-59)
+
+        return time;
+
+    }
+    function addquxiao(){
+        mui("#tanchuang").on("tap",".quxiao",function(){
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mask.close();
+        });
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="css/mui.css"/>
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <title>聊天框</title>
+    <style type="text/css">
+        .body p{
+            margin: 0;
+        }
+        .body .mui-title{
+            font-weight: 600;
+            font-size: 18px;
+        }
+        .chat-left{
+            max-width: 70%;
+            min-width: 2px;
+            min-height: 41px;
+            margin-top: 1em;
+            padding-left: 10px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .chat-right{
+            max-width: 70%;
+            min-width: 2px;
+            min-height: 41px;
+            margin-top: 1em;
+            padding-right: 10px;
+            border-radius: 4px;
+            position: relative;
+        }
+        .chat-left::before{
+            position: absolute;
+            top: 4px;
+            right: 0;
+            left: -18px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-top: 8px solid transparent;
+            border-right: 10px solid #eee;
+            border-bottom: 8px solid transparent;
+            content: '';
+        }
+        .chat-right::before{
+            position: absolute;
+            top: 4px;
+            right: -18px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #35f756;
+            border-top: 8px solid transparent;
+            border-right: 10px solid transparent;
+            border-bottom: 8px solid transparent;
+            content: '';
+        }
+        .userImg>img{
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+            width: 50px;
+            height: 50px;
+        }
+        /*回复框*/
+        .nav-bottom{
+            bottom: 0;
+            padding: 6px;
+            height: 48px;
+        }
+    </style>
+</head>
+<body class="body" style="background-color: #fff;min-height: 100vh;">
+    <header id="header" style="position:fixed; top: 0;" class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">陈 蓉</h1>
+        <a href="其他用户个人主页.html" class="mui-icon mui-icon-person mui-pull-right" STYLE="FONT-SIZE: 30PX;"></a>
+    </header>
+
+    <div id="textList" class="mui-content" style="background-color: #fff; padding-bottom: 60px;">
+        <div class="mui-row" style="margin-top: 1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png" class="left" width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top: 1rem;">
+            <div class="mui-col-xs-2" style="text-align: center;float: right;"><img src="img/sq_bg_img1.png" class="right" width="80%"></div>
+            <div class="chat-right" style="background-color: #35f756;padding: 10px;float: right;margin-right: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top:1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png" class="left" width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top: 1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png" class="left" width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top: 1rem;">
+            <div class="mui-col-xs-2" style="text-align: center;float: right;"><img src="img/sq_bg_img1.png" class='right' width="80%"></div>
+            <div class="chat-right" style="background-color: #35f756;padding: 10px;float: right;margin-right: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top:1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png" class='left' width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top: 1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png" class="left" width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top: 1rem;">
+            <div class="mui-col-xs-2" style="text-align: center;float: right;"><img src="img/sq_bg_img1.png" class="right"width="80%"></div>
+            <div class="chat-right" style="background-color: #35f756;padding: 10px;float: right;margin-right: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+
+        <div class="mui-row" style="margin-top:1rem">
+            <div class="mui-col-xs-2 userImg" style="text-align: center"><img src="img/sq_head_img3.png"class="left" width="80%"></div>
+            <div class="chat-left" style="background-color: #eee;padding: 10px;float: left;margin-left: 5px">
+                <p>四大基地计算机技术低价手机的世界第三第四局地籍司的加斯加第四季度结束的祭祀的计算机第三季第四季第三等级的计算机第三的计算机滴</p>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!--底部输入框-->
+<nav class="mui-bar nav-bottom mui-row" id="footerInput">
+    <div class="mui-col-xs-10">
+        <textarea id="textBox" placeholder="输入回复内容" style="overflow:hidden;width: 92%;margin-left:1%;height:36px;border-color: #fff;"></textarea>
+    </div>
+    <div class="mui-col-xs-2">
+        <button  id="fasong" type="button" style="
+            padding: 5px 10px;
+    border-color: #007aff;
+    background: #007aff;
+    color: #FFF;
+    margin-top: 3px;
+        ">
+            发送</button>
+    </div>
+</nav>
+
+</body>
+
+<script>
+    mui.init();
+    window.onload= function(){
+        mui.scrollTo($("#textList")[0].scrollHeight,1);
+    }
+    mui("#footerInput").on("tap","#fasong",function(){
+            /*发送前 判断发送内容是否为空*/
+          if($("#textBox").val().toString().trim()!=""){
+              $("#textList").append(" <div class='mui-row' style='margin-top:0.4em'>"+
+                                      "<div class='mui-col-xs-2 userImg' style='text-align: center;float: right'><img src='img/sq_bg_img1.png' width='80%'></div>" +
+                                      "<div class='chat-right' style='float:right;background-color: #35f756;padding: 10px;    margin-right: 10px;'><p style='word-break: break-all;'>"+$("#textBox").val()+"</p></div>"+
+                                    "</div>");
+              $("#textBox").val("");
+              mui.scrollTo($("#textList")[0].scrollHeight,500);
+
+
+          }else{
+              mui.alert("请输入发送内容");
+          }
+
+
+    })
+
+    mui("#textList").on('tap','.left',function(){
+        mui.openWindow({
+            url:'个人主页-(查看).html'
+        })
+    })
+    mui("#textList").on('tap','.right',function(){
+        mui.openWindow({
+            url:'个人主页.html'
+        })
+    })
+
+
+
+
+
+
+
+
+</script>
+</html>

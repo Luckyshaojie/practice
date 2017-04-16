@@ -1,0 +1,355 @@
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--ios中是否隐藏状态栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--ios中 顶部nav的样式 为黑色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>消息中心</title>
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <!--MUI扩展图标库-->
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <!--Jq框架-->
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <!--标准MUIJS库-->
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <style>
+        /*大小屏通用样式*/
+        *{
+            font-family: '微软雅黑';
+        }
+        #header h1{
+             text-align: left;
+         }
+        .mui-content>.mui-table-view:first-child {
+             margin-top: 0px;
+        }
+        #PlPage .mui-table-view .mui-media-object {
+            line-height: 50px;
+            max-width: 50px;
+            height: 50px;
+            margin-top: 5px;
+        }
+        body>ul{
+            margin-top: 0px;;
+        }
+        #TzPage p{
+            width: 30%;
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            margin-left: 35%;
+            text-align: -webkit-center;
+            height: 25px;
+            line-height: 25PX;
+            BORDER-RADIUS: 4PX;
+            MARGIN-TOP: 10PX;
+        }
+        /*小屏  iphone4 5 */
+        @media screen and (min-width:320px) and (max-width:374px) {
+            #content{
+                font-size:13px;
+            }
+            #content > ul li > a > img {
+                border: 0;
+                width: 40px;
+                height: 40px;
+                vertical-align: middle;
+                margin-right: 10px;
+                margin-left: -5px;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+            }
+            #content > ul li{
+                position: relative;
+            }
+            .addTime{
+               position: absolute;
+                right: 23px;
+                color: lightgrey;
+                font-size: 12px;
+            }
+            #userList p{
+                font-size: 12px;
+                color: darkgrey;
+                width: 87%;
+
+            }
+            .plBody>div{
+                font-size: 15px;
+                color: #1e67b6;
+            }
+            .plBody>div>p{
+                font-size: 12px;
+
+            }
+            .userImg{
+                border-radius: 100%;
+                margin-top: 5px;
+            }
+
+        }
+        /*大屏 iphone6  6p 或者更大*/
+        @media screen and (min-width:375px) and (max-width:2000px) {
+                #content{
+                    font-size:16px;
+                }
+                #content > ul li > a > img {
+                    border: 0;
+                    width: 40px;
+                    height: 40px;
+                    vertical-align: middle;
+                    margin-right: 10px;
+                    margin-left: -5px;
+                    -webkit-border-radius: 100%;
+                    -moz-border-radius: 100%;
+                    border-radius: 100%;
+                }
+                #content > ul li{
+                    position: relative;
+                }
+                .addTime{
+                    position: absolute;
+                    right: 23px;
+                    color: lightgrey;
+                    font-size: 14px;
+                }
+                #userList p{
+                    font-size: 14px;
+                    color: darkgrey;
+                    width: 87%;
+                }
+                .plBody>div{
+                    font-size: 15px;
+                    color: #1e67b6;
+                }
+                .plBody>div>p{
+                    font-size: 12px;
+                }
+
+                .userImg{
+                    border-radius: 100%;
+                    width: 50px;
+                    height: 50px;
+                    margin-top: 5px;
+                }
+               
+        }
+    </style>
+</head>
+<body>
+    <header id="header" class="mui-bar mui-bar-nav">
+        <h1 class="mui-title">消息列表</h1>
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" href=""></a>
+    </header>
+    <!--初始化 消息展示页-->
+    <div class="mui-content"  id="content">
+        <ul class="mui-table-view">
+            <!--社区通知-->
+            <li class="mui-table-view-cell" id="TZ">
+                <a class="mui-navigate-right">
+                    <img src="img/sq_tongzhi2.png" alt=""/>通知
+                    <span class="mui-badge mui-badge-danger">new</span>
+                </a>
+            </li>
+            <!--评论我的-->
+            <li class="mui-table-view-cell" id="PL">
+                <a class="mui-navigate-right" href="javascript:openwebView('评论列表.html','pllb');">
+                    <img src="img/sq_pinglun3.png" alt=""/>评论
+                    <span class="mui-badge mui-badge-danger">new</span>
+                </a>
+            </li>
+            <!--用户私信-->
+            <div id="userList">
+                <!--用户2-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/userImg.jpg">
+                        <div class="mui-media-body">
+                            <span>木屋</span>
+                            <span class="addTime time" style="display: none;">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="color: #fff;top: 25px;right: 15px;">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户1-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/sq_head_img2.png">
+                        <div class="mui-media-body">
+                            <span>张三</span>
+                            <span class="addTime time">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="color: #fff;top: 25px;right: 15px; display: none">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户2-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/userImg.jpg">
+                        <div class="mui-media-body">
+                            <span>木屋</span>
+                            <span class="addTime time" style="">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="display: none;color: #fff;top: 25px;right: 15px;">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户1-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/sq_head_img2.png">
+                        <div class="mui-media-body">
+                            <span>张三</span>
+                            <span class="addTime time">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="color: #fff;top: 25px;right: 15px; display: none">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户2-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/userImg.jpg">
+                        <div class="mui-media-body">
+                            <span>木屋</span>
+                            <span class="addTime time" style="">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="display: none;color: #fff;top: 25px;right: 15px;">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户1-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/sq_head_img2.png">
+                        <div class="mui-media-body">
+                            <span>张三</span>
+                            <span class="addTime time">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="color: #fff;top: 25px;right: 15px; display: none">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户2-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/userImg.jpg">
+                        <div class="mui-media-body">
+                            <span>木屋</span>
+                            <span class="addTime time" style="">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="display: none;color: #fff;top: 25px;right: 15px;">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+                <!--用户1-->
+                <li class="mui-table-view-cell mui-media">
+                    <a href="聊天界面.html">
+                        <img class="mui-media-object mui-pull-left" src="img/sq_head_img2.png">
+                        <div class="mui-media-body">
+                            <span>张三</span>
+                            <span class="addTime time">2017-2-16</span>
+                            <span class="mui-badge mui-badge-danger addTime redNum" style="color: #fff;top: 25px;right: 15px; display: none">1</span>
+                            <p class='mui-ellipsis'>想要这样一间小木屋，夏天挫冰吃瓜，冬天围炉取暖.</p>
+                        </div>
+                    </a>
+                </li>
+              
+         </div>
+        </ul>
+    </div>
+    <!--隐藏页 社区通知页-->
+    <div class="mui-content" id="TzPage" style="display:none">
+        <div>
+            <p>2017 02-12</p>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    新通知！！
+                </div>
+                <div class="mui-card-content">
+                    <div class="mui-card-content-inner">
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                    </div>
+                </div>
+            </div>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    新通知！！
+                </div>
+                <div class="mui-card-content">
+                    <div class="mui-card-content-inner">
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                    </div>
+                </div>
+            </div>
+            <p>2017 02-16</p>
+            <div class="mui-card">
+                <div class="mui-card-header">
+                    新通知！！<span class="mui-badge mui-badge-danger">new</span>
+                </div>
+                <div class="mui-card-content">
+                    <div class="mui-card-content-inner">
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                        包含页眉页脚的卡片，页眉常用来显示面板标题，页脚用来显示额外信息或支持的操作（比如点赞、评论等）
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+    <script>
+        mui.init();
+       mui("#userList").on("tap",'li',function(){
+            mui.openWindow({
+                url:'聊天界面.html'
+            });
+       })
+        function getDate(){
+            var mydate = new Date();
+            var time="";
+            time+= mydate.getHours()+":"; //获取当前小时数(0-23)
+            time+=(mydate.getMinutes().length!=1?mydate.getMinutes():"0"+mydate.getMinutes())+""; //获取当前分钟数(0-59)
+
+            return time;
+
+        }
+
+        /*通知点击事件 点击进入通知页*/
+        mui("#content").on("tap","#TZ",function(){
+                $("#header>h1").html("通知");
+                $("#header>a").removeClass("mui-action-back");
+                $(".mui-content").hide();
+                $("#TzPage").show();
+                mui.scrollTo($("#TzPage")[0].scrollHeight,1);
+                mui("#header").on("tap","a",function(){
+                    mui.scrollTo(0,1);
+                    $("#header>h1").html("消息列表");
+                    $("#header>a").addClass("mui-action-back");
+                    $(".mui-content").hide();
+                    $("#content").show();
+                    mui("#header").off("tap")
+                });
+        });
+        mui("#content").on("tap","#PL",function(){
+            mui.openWindow({
+                url:"评论列表.html",
+                id:'pl'
+
+            })
+        });
+
+        /*进入子页面后 返回按钮的点击事件*/
+
+    </script>
+</html>

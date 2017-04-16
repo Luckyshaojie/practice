@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>详情</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/mui.zoom.js"></script>
+    <script src="js/mui.previewimage.js"></script>
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/mui-icon-extra.css">
+    <style>
+        /*动态列表样式*/
+        .body .mui-table-view .mui-media-object{
+            max-width: 90%;
+            height: auto;
+        }
+        .no-tital-p{
+            height: 128px
+        }
+        .body .mui-media-body{
+            color: #333;
+        }
+        .all-content{
+            color: #3996fd;
+        }
+        .p-pos{
+            font-size: 18px;
+            line-height: 1.4;
+            opacity: .8;
+            position: absolute;
+            right: 0;
+        }
+        .positon-p{
+            color: #666;
+            font-size: 14px;
+            position: relative;
+        }
+        .pop-zan{
+            color: #fff;
+            width: 140px;
+            height: 30px;
+            background-color: #000;
+            padding: 4px;
+            opacity: .6;
+            position: absolute;
+            right: 34px;
+            bottom: -6px;
+            display: none;
+            z-index: 14;
+        }
+        .pop-zan::after{
+            width: 0;
+            height: 0;
+            border-left: 14px solid #000;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 6px solid transparent;
+            position: absolute;
+            content: '';
+            right: -22px;
+            top: 2px;
+
+        }
+        .pl-content img{
+            width: 100%;
+        }
+        .pl-content .mui-col-xs-4{
+            padding: 2px;
+        }
+        /*重写样式*/
+        .mui-table-view-cell > a:not(.mui-btn){
+            white-space: normal;
+        }
+        body{
+            background-color: #fff;
+        }
+        /*头部样式*/
+        .mui-bar .mui-title{
+            right: 16%;
+            left: 16%;
+        }
+        #tapClass .mui-table-view-cell:after{
+            right: 15px;
+        }
+        #headImg img{
+            width: 44px;
+        }
+        /*评论区*/
+        .pinglun-bg{
+            position: relative;
+            width: 100%;
+            height: auto;
+            padding: 6px;
+            background-color: #eee;
+            margin-top: 10px;
+        }
+        .pinglun-bg::before{
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 12px solid #eee;
+            position: absolute;
+            top: -20px;
+            left: 4%;
+        }
+        .zan-container{
+            color: #666;
+            font-size: 14px;
+            width: 100%;
+            padding: 4px;
+        }
+        .zan-container .mui-icon-extra{
+            font-size: 16px;
+        }
+        .pinglun-bg .mui-table-view{
+            color: #666;
+            font-size: 14px;
+            background-color: transparent;
+        }
+        .pinglun-bg .mui-table-view-cell{
+            overflow: visible;
+            padding: 1px 10px;
+        }
+        .pinglun-bg .mui-table-view-cell:after{
+            background-color: transparent;
+        }
+        .pinglun-bg .mui-table-view:after{
+            background-color: transparent;
+        }
+        .pop-pinglun{
+            height: 220px;
+            width: 100%;
+            padding: 16px;
+            background-color: #fff;
+            z-index: 999;
+            position: absolute;
+            top: -240px;
+            transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            -webkit-transition: all 0.4s;
+            -o-transition:all 0.4s;
+        }
+        textarea{
+            margin-bottom: 0;
+        }
+        .user-name{
+            color: #3996fd;
+        }
+        .mui-table-view:after{
+            background-color: transparent;
+        }
+        #ulContainer{
+            padding-top: 44px;
+        }
+    </style>
+    <!--App自定义的css-->
+    <style type="text/css">
+        .mui-preview-image.mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-preview-header,
+        .mui-preview-footer {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            z-index: 10;
+        }
+        .mui-preview-header {
+            height: 44px;
+            top: 0;
+        }
+        .mui-preview-footer {
+            height: 50px;
+            bottom: 0px;
+        }
+        .mui-preview-header .mui-preview-indicator {
+            display: block;
+            line-height: 25px;
+            color: #fff;
+            text-align: center;
+            margin: 15px auto 4px;
+            width: 70px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        .mui-preview-image {
+            display: none;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .mui-preview-image.mui-preview-in {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+        .mui-preview-image.mui-preview-out {
+            background: none;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+        .mui-zoom-scroller {
+            position: absolute;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            -webkit-backface-visibility: hidden;
+        }
+        .mui-zoom {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .mui-slider .mui-slider-group .mui-slider-item img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+            width: 100%;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+            display: inline-table;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .mui-preview-loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .mui-preview-loading.mui-active {
+            display: block;
+        }
+        .mui-preview-loading .mui-spinner-white {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+            height: 50px;
+            width: 50px;
+        }
+        .mui-preview-image img.mui-transitioning {
+            -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        p img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+
+</head>
+
+<body class="body">
+<header id="header" style="position: fixed; top: 0;"  class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">详情</h1>
+</header>
+<div id="ulContainer" class="mui-scroll">
+    <ul class="mui-table-view">
+        <li class="mui-table-view-cell mui-media">
+            <a href="javascript:;">
+                <div class="mui-row">
+                    <div class="mui-col-xs-2">
+                        <img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+                    </div>
+                    <div class="mui-col-xs-10 pl-content">
+                        <div class="mui-media-body">
+                            陈蓉
+                            <p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+                                给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+                                2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+                                失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+                            </p>
+                        </div>
+                        <p class="all-content">全部</p>
+                        <div class="mui-row">
+                            <div class="mui-col-xs-4"><img src="img/shequBG.png" data-preview-src="" data-preview-group="1" /></div>
+                            <div class="mui-col-xs-4"><img src="img/shequBG.png" data-preview-src="" data-preview-group="1" /></div>
+                            <div class="mui-col-xs-4"><img src="img/shequBG.png" data-preview-src="" data-preview-group="1" /></div>
+                        </div>
+                        <div class="positon-p">
+                            <span>1小时前</span>
+                            <span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+                            <div class="mui-row pop-zan">
+                                <div class="mui-col-xs-6 dianzan">
+                                    <span class="mui-icon-extra mui-icon-extra-heart"></span>
+                                    <span>赞</span>
+                                </div>
+                                <div class="mui-col-xs-6 pinglun">
+                                    <span class="mui-icon mui-icon-chatboxes"></span>
+                                    <span>评论</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </a>
+        </li>
+    </ul>
+</div>
+<!--评论弹窗-->
+<div class="pop-pinglun">
+    <textarea rows="6"></textarea>
+    <div style="text-align: center">
+        <button id="concel" type="button">取消</button>
+        <button id="send" type="button" class="mui-btn mui-btn-success">发送</button>
+    </div>
+
+</div>
+
+<script>
+    mui.init();
+    mui.previewImage();
+    var mask = mui.createMask(hideTextArea);
+    var nowtip = null;//存储当前评论位置
+    var nowcol10 = null;//mui-col-xs-10
+
+    /*显示全部和收起*/
+    mui("#ulContainer").on("tap",".all-content",function(){
+        if($(this).text() == "全部"){
+            $(this).prev().find("p").css("height","auto");
+            $(this).text('收起');
+        }else {
+            $(this).prev().find("p").css("height",128+"px");
+            $(this).text('全部');
+        }
+    })
+    /*评论和点赞*/
+    var username = "<span class='user-name'>刘医生</span>";
+    var thisname =null;
+    mui("#ulContainer").on('tap',".p-pos",function(){
+        $(".pop-zan").not($(this).next()).hide();
+        $(this).next().toggle();
+    })
+    //	点赞
+    mui("#ulContainer").on("tap",".dianzan",function(){
+        $(this).parent().hide();
+        var contentContainer = $(this).parent().parent().parent();
+        var len = contentContainer.find(".pinglun-bg");
+        if(len.length){
+            var length = contentContainer.find(".zan-container").children().length;
+            if(length>0){
+                addZan(username,contentContainer,true);
+            }else {
+                addZan(username,contentContainer,false);
+            }
+        }else {
+            createPingLunQu(contentContainer);
+            addZan(username,contentContainer,false)
+            /*var tip = $(this).parent().parent().parent();
+             var container = createPingLunQu(tip);
+             addZan("刘医生",container);*/
+        }
+
+    })
+    function createPingLunQu(container){
+        var pl = $("<div class='pinglun-bg'><div class='zan-container'></div><ul class='mui-table-view'></ul></div>")
+        container.append(pl);
+    }
+    function addZan(name,container,boolean){
+        if(boolean){
+            var namespan = $("<span>,"+ name +"</span>")
+        }else {
+            var namespan = $("<span class='mui-icon-extra mui-icon-extra-heart' style='color: #3996fd'></span><span>"+ name +"</span>")
+        }
+        container.find(".zan-container").append(namespan);
+    }
+    //	评论
+    mui("#ulContainer").on("tap",".pinglun",function(){
+        $(this).parent().hide();
+        nowtip = $(this).parent().parent().parent().find(".pinglun-bg");
+        nowcol10 = $(this).parent().parent().parent();
+        $(".pop-pinglun").find("textarea").attr("placeholder",'');
+        showTextArea();
+    })
+    function addPingLun(name,content,container,boolean){
+        /*var length = container.children().length;*/
+        console.log(typeof boolean);
+        if(boolean == "true"){
+            var name = name + "回复" +"<span class='user-name'>"+thisname+"</span>"
+        }
+        var li = $("<li class='mui-table-view-cell'>"+ name +"：" + content + "</li>")
+        container.children().eq(1).append(li);
+    }
+    /*发送和取消*/
+    mui("#send")[0].addEventListener("tap",function(){
+        var textarea = $(".pop-pinglun").find("textarea");
+        var text = textarea.val();
+        var boo = $(this).attr("reply");
+        if(text){
+            $(".pop-pinglun").css("top",-240+"px");
+            mask.close();//显示遮罩
+            if(nowtip.length){
+                addPingLun(username,text,nowtip,boo);
+            }else {
+                createPingLunQu(nowcol10);
+                var container = nowcol10.find(".pinglun-bg");
+                addPingLun(username,text,container);
+            }
+            textarea.val('');
+            $(this).attr("reply",false);
+        }else {
+            alert("回复不能为空");
+        }
+
+    })
+    mui("#concel")[0].addEventListener("tap",function(){
+        $(".pop-pinglun").css("top",-240+"px");
+        mask.close();//显示遮罩
+    })
+    function fasong(isreply){
+
+    }
+    /*隐藏输入框*/
+    function hideTextArea(){
+        $(".pop-pinglun").css("top",-240+"px");
+    }
+    /*弹出输入框*/
+    function showTextArea(content){
+        $(".pop-pinglun").find("textarea").attr("placeholder",content);
+        mask.show();//显示遮罩
+        $(".pop-pinglun").css("top",0);
+    }
+    //给每条回复绑定点击事件
+    mui(".pl-content").on("tap","li",function(){
+        nowtip = $(this).parent().parent();
+        nowcol10 = $(this).parent().parent().parent();
+        thisname = $(this).find(".user-name").eq(0).text();
+        var str = "@"+thisname;
+        showTextArea(str);
+        $("#send").attr("reply",true);
+    })
+
+</script>
+</body>
+</html>

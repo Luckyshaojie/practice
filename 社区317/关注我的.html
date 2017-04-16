@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<script src="js/mui.min.js"></script>
+		<script src="js/jquery-1.8.3.min.js"></script>
+	</head>
+	<body>
+	<header id="header" class="mui-bar mui-bar-nav">
+		<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		<h1 class="mui-title">关注我的</h1>
+	</header>
+	<div class="mui-content">
+	<ul style="margin-top: 0px;" class="mui-table-view">
+	<li class="mui-table-view-cell mui-hidden">
+		<div id="M_Toggle" class="mui-switch mui-active">
+			<div class="mui-switch-handle"></div>
+		</div>
+	</li>
+	<li class="mui-table-view-cell mui-media">
+		<a href="#">  
+			<img style="border-radius: 2rem;" class="mui-media-object mui-pull-left" src="http://cdn2.yicloud.org/images/tanxianjie.jpg">
+			<div class="mui-media-body">
+				谭先杰
+				<p class='mui-ellipsis'>主任医师   教授  </p>
+				<button id="guanzhu"  style="font-weight:bold;margin-top: -36px; float:right;font-size: 12px;height: 30px;" class="mui-btn mui-btn-blue mui-btn-outlined">＋关注</button>
+			</div>
+		</a>
+	</li>
+	<li class="mui-table-view-cell mui-media">
+		<a href="#">
+			<img style="border-radius: 2rem;" class="mui-media-object mui-pull-left" src="http://cdn2.yicloud.org/images/tanxianjie.jpg">
+			<div class="mui-media-body">
+				谭先杰
+				<p class='mui-ellipsis'>主任医师   教授</p>
+				<button id="" style="font-weight:bold;margin-top: -36px; float:right;font-size: 12px;height: 30px;" class="mui-btn mui-btn-blue mui-btn-outlined">＋关注</button>
+			</div>
+		</a>
+	</li>
+	
+	
+	<li class="mui-table-view-cell mui-media">
+		<a href="#">
+			<img style="border-radius: 2rem;" class="mui-media-object mui-pull-left" src="http://cdn2.yicloud.org/images/tanxianjie.jpg">
+			<div class="mui-media-body">
+				谭先杰
+				<p class='mui-ellipsis'>主任医师   教授</p>
+				<button id=""  style="font-weight:bold;margin-top: -36px; float:right;font-size: 12px;height: 30px;" class="mui-btn mui-btn-blue mui-btn-outlined">＋关注</button>
+			</div>
+		</a>
+	</li>
+	<li class="mui-table-view-cell mui-media">
+		<a href="#">
+			<img style="border-radius: 2rem;" class="mui-media-object mui-pull-left" src="http://cdn2.yicloud.org/images/tanxianjie.jpg">
+			<div class="mui-media-body">
+				谭先杰
+				<p class='mui-ellipsis'>主任医师   教授</p>
+				<button id=""  style="font-weight:bold;margin-top: -36px; float:right;font-size: 12px;height: 30px;" class="mui-btn mui-btn-blue mui-btn-outlined">＋关注</button>
+			</div>
+		</a>
+	</li>
+	<li class="mui-table-view-cell mui-media">
+		<a href="#">
+			<img style="border-radius: 2rem;" class="mui-media-object mui-pull-left" src="http://cdn2.yicloud.org/images/tanxianjie.jpg">
+			<div class="mui-media-body">
+				谭先杰
+				<p class='mui-ellipsis'>主任医师   教授</p>
+				<button id=""  style="font-weight:bold;margin-top: -36px; float:right;font-size: 12px;height: 30px;" class="mui-btn mui-btn-blue mui-btn-outlined">＋关注</button>
+			</div>
+		</a>
+	</li>
+
+</ul>
+</div>
+
+<script type="text/javascript">
+	mui.init()
+	var item =null;
+	mui(".mui-media-body").on('tap','#guanzhu',function(){
+		console.log((this).innerText);
+		if(this.innerText =="＋关注")
+		{
+			 mui.alert("关注成功!");
+			 this.innerText="取消关注";
+		}else
+		{
+			item=this;
+			mui.confirm('确定不再关注此医生？', '', ["否","是"], function(e) {
+			console.log($(item));
+				if (e.index==1) {
+				  $(item).context.innerHTML="＋关注";
+				  console.log("ok");
+				} else {
+				 $(item).context.innerHTML="取消关注";
+				  console.log("no");
+				}
+			})
+		}
+   });
+</script>
+</body>
+</html>

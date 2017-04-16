@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>社区</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+	<script src="js/mui.min.js"></script>
+	<script src="js/mui.zoom.js"></script>
+	<script src="js/mui.previewimage.js"></script>
+	<link rel="stylesheet" href="css/mui.min.css">
+	<link rel="stylesheet" href="css/mui-icon-extra.css">
+	<style>
+		/*动态列表样式*/
+		.body .mui-table-view .mui-media-object{
+			max-width: 90%;
+			height: auto;
+		}
+		.no-tital-p{
+			height: 128px
+		}
+		.body .mui-media-body{
+			color: #333;
+		}
+		.all-content{
+			color: #3996fd;
+		}
+		.p-pos{
+			font-size: 18px;
+			line-height: 1.4;
+			opacity: .8;
+			position: absolute;
+			right: 0;
+		}
+		.positon-p{
+			color: #666;
+			font-size: 14px;
+			position: relative;
+		}
+		.pop-zan{
+			color: #fff;
+			width: 140px;
+			height: 30px;
+			background-color: #000;
+			padding: 4px;
+			opacity: .6;
+			position: absolute;
+			right: 34px;
+			bottom: -6px;
+			display: none;
+			z-index: 14;
+		}
+		.pop-zan::after{
+			width: 0;
+			height: 0;
+			border-left: 14px solid #000;
+			border-top: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 6px solid transparent;
+			position: absolute;
+			content: '';
+			right: -22px;
+			top: 2px;
+
+		}
+		.pl-content img{
+			width: 100%;
+		}
+		.pl-content .mui-col-xs-11 span{
+			font-size: 14px;
+			color: #3996fd;
+		}
+		.pl-content .mui-col-xs-4{
+			padding: 2px;
+		}
+		/*重写样式*/
+		.mui-table-view-cell > a:not(.mui-btn){
+			white-space: normal;
+		}
+
+		/*头部样式*/
+		.mui-bar .mui-title{
+			right: 16%;
+			left: 16%;
+		}
+		#tapClass{
+			width: 40%;
+			margin: 0;
+			position: absolute;
+			top: 44px;
+			left: 30%;
+			z-index: 11;
+			display: none;
+			overflow: visible;
+		}
+		#sanjiao{
+			width: 0;
+			height: 0;
+			border-left: 12px solid transparent;
+			border-top: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 12px solid #fff;
+			position: absolute;
+			top: -22px;
+			left: 46%;
+			z-index: 11;
+		}
+		#tapClass .mui-table-view-cell:after{
+			right: 15px;
+		}
+		#headImg img{
+			width: 44px;
+		}
+		/*评论区*/
+		.pinglun-bg{
+			position: relative;
+			width: 100%;
+			height: auto;
+			padding: 6px;
+			background-color: #eee;
+			margin-top: 10px;
+		}
+		.pinglun-bg::before{
+			content: '';
+			width: 0;
+			height: 0;
+			border-left: 12px solid transparent;
+			border-top: 12px solid transparent;
+			border-right: 12px solid transparent;
+			border-bottom: 12px solid #eee;
+			position: absolute;
+			top: -20px;
+			left: 4%;
+		}
+		.zan-container{
+			color: #666;
+			font-size: 14px;
+			width: 100%;
+			padding: 4px;
+		}
+		.zan-container .mui-icon-extra{
+			font-size: 16px;
+		}
+		.pinglun-bg .mui-table-view{
+			color: #666;
+			font-size: 14px;
+			background-color: transparent;
+		}
+		.pinglun-bg .mui-table-view-cell{
+			overflow: visible;
+			padding: 1px 10px;
+			word-break: break-all;
+		}
+		.pinglun-bg .mui-table-view-cell:after{
+			background-color: transparent;
+		}
+		.pinglun-bg .mui-table-view:after{
+			background-color: transparent;
+		}
+		.pop-pinglun{
+			height: 220px;
+			width: 100%;
+			padding: 16px;
+			background-color: #fff;
+			z-index: 999;
+			position: absolute;
+			top: -240px;
+			transition: all 0.4s;
+			-moz-transition: all 0.4s;
+			-webkit-transition: all 0.4s;
+			-o-transition:all 0.4s;
+		}
+		.pop-pinglun button{
+			padding: 6px 20px;
+		}
+		textarea{
+			margin-bottom: 0;
+		}
+		.user-name{
+			color: #3996fd;
+		}
+		/*侧滑*/
+		#offCanvasSide{
+			color: #fff;
+		}
+		.aside-header{
+			text-align: center;
+		}
+		#asideUl img{
+			width: 24px;
+		}
+		#offCanvasWrapper .mui-off-canvas-left{
+			width: 60%;
+		}
+	</style>
+	<!--App自定义的css-->
+	<style type="text/css">
+		.mui-preview-image.mui-fullscreen {
+			position: fixed;
+			z-index: 20;
+			background-color: #000;
+		}
+		.mui-preview-header,
+		.mui-preview-footer {
+			position: absolute;
+			width: 100%;
+			left: 0;
+			z-index: 10;
+		}
+		.mui-preview-header {
+			height: 44px;
+			top: 0;
+		}
+		.mui-preview-footer {
+			height: 50px;
+			bottom: 0px;
+		}
+		.mui-preview-header .mui-preview-indicator {
+			display: block;
+			line-height: 25px;
+			color: #fff;
+			text-align: center;
+			margin: 15px auto 4px;
+			width: 70px;
+			background-color: rgba(0, 0, 0, 0.4);
+			border-radius: 12px;
+			font-size: 16px;
+		}
+		.mui-preview-image {
+			display: none;
+			-webkit-animation-duration: 0.5s;
+			animation-duration: 0.5s;
+			-webkit-animation-fill-mode: both;
+			animation-fill-mode: both;
+		}
+		.mui-preview-image.mui-preview-in {
+			-webkit-animation-name: fadeIn;
+			animation-name: fadeIn;
+		}
+		.mui-preview-image.mui-preview-out {
+			background: none;
+			-webkit-animation-name: fadeOut;
+			animation-name: fadeOut;
+		}
+		.mui-preview-image.mui-preview-out .mui-preview-header,
+		.mui-preview-image.mui-preview-out .mui-preview-footer {
+			display: none;
+		}
+		.mui-zoom-scroller {
+			position: absolute;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: flex;
+			-webkit-box-align: center;
+			-webkit-align-items: center;
+			align-items: center;
+			-webkit-box-pack: center;
+			-webkit-justify-content: center;
+			justify-content: center;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			margin: 0;
+			-webkit-backface-visibility: hidden;
+		}
+		.mui-zoom {
+			-webkit-transform-style: preserve-3d;
+			transform-style: preserve-3d;
+		}
+		.mui-slider .mui-slider-group .mui-slider-item img {
+			width: auto;
+			height: auto;
+			max-width: 100%;
+			max-height: 100%;
+		}
+		.mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+			width: 100%;
+		}
+		.mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+			display: inline-table;
+		}
+		.mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+			display: table-cell;
+			vertical-align: middle;
+		}
+		.mui-preview-loading {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			display: none;
+		}
+		.mui-preview-loading.mui-active {
+			display: block;
+		}
+		.mui-preview-loading .mui-spinner-white {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			margin-left: -25px;
+			margin-top: -25px;
+			height: 50px;
+			width: 50px;
+		}
+		.mui-preview-image img.mui-transitioning {
+			-webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+			transition: transform 0.5s ease, opacity 0.5s ease;
+		}
+		@-webkit-keyframes fadeIn {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		@keyframes fadeIn {
+			0% {
+				opacity: 0;
+			}
+			100% {
+				opacity: 1;
+			}
+		}
+		@-webkit-keyframes fadeOut {
+			0% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
+		@keyframes fadeOut {
+			0% {
+				opacity: 1;
+			}
+			100% {
+				opacity: 0;
+			}
+		}
+		p img {
+			max-width: 100%;
+			height: auto;
+		}
+	</style>
+
+</head>
+
+<body class="body">
+<div id="offCanvasWrapper" class="mui-off-canvas-wrap mui-scalable">
+	<!--侧滑菜单部分-->
+	<aside id="offCanvasSide" class="mui-off-canvas-left">
+		<div id="offCanvasSideScroll" class="mui-scroll-wrapper">
+			<div class="mui-scroll">
+				<div class="mui-row" style="padding-top: 12%;padding-bottom: 4%">
+					<div class="mui-col-xs-12 aside-header">
+						<a href="#" onclick="openPage('个人主页.html')"><img src="img/headpic1.png" width="26%" style="border-radius: 50%"></a>
+					</div>
+				</div>
+				<div class="mui-row">
+					<div class="mui-col-xs-12 aside-header">
+						<span>刘医生</span>
+					</div>
+				</div>
+				<div class="mui-row" style="margin-bottom: 20px;">
+					<div class="mui-col-xs-12 aside-header">
+						<!--<button type="button">按钮一</button>
+						<button type="button">按钮二</button>-->
+						<span>主治医师</span>
+					</div>
+				</div>
+				<ul id="asideUl" class="mui-table-view mui-table-view-chevron mui-table-view-inverted">
+					<li class="mui-table-view-cell">
+						<a href="个人主页.html" onclick="openPage('个人主页.html')">
+							<img src="img/个人中心.png">
+							个人主页
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="我的收藏新.html" onclick="openPage('我的收藏新.html')">
+							<img src="img/收藏.png">
+							我的收藏
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a href="草稿箱.html" onclick="alert('暂未开通')">
+							<img src="img/草稿箱.png">
+							草稿箱
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a onclick="openPage('浏览历史.html')">
+							<img src="img/浏览历史.png">
+							浏览历史
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a onclick="openPage('url')">
+							<img src="img/退出.png" width="20">
+							退出社区
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</aside>
+	<!--主界面部分-->
+	<div class="mui-inner-wrap">
+		<header class="mui-bar mui-bar-nav">
+			<a id="headImg" href="#offCanvasSide" class="mui-pull-left"><img src="img/headpic.png"></a>
+			<span class="mui-icon mui-icon-search mui-pull-right"></span>
+			<span class="mui-icon mui-icon-chat mui-pull-right" style="font-size: 20px;color: #666;margin-right: 0;position: relative;top: 2px;"></span>
+			<h1 id="headerTitle" class="mui-title"><a>全部动态</a><span class="mui-icon mui-icon-arrowdown" style="color: #ec971f"></span></h1>
+		</header>
+		<div id="tapClass" class="mui-card">
+			<div id="sanjiao"></div>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell">
+					<a>
+						全部动态
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						乳腺癌社区
+					</a>
+				</li>
+				<li class="mui-table-view-cell">
+					<a>
+						与美丽同行社区
+					</a>
+				</li>
+			</ul>
+		</div>
+		<div id="offCanvasContentScroll" class="mui-content mui-scroll-wrapper">
+			<div id="ulContainer" class="mui-scroll">
+
+				<ul class="mui-table-view" style="display: none">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-row">
+							<div class="mui-col-xs-2">
+								<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+							</div>
+							<div class="mui-col-xs-10">
+								<span>乳腺癌社区</span>
+								<div>
+									<button>发帖</button>
+									<button>申请加入</button>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2" style="text-align: center">
+									<span style="border: 1px solid #2ac845;border-radius: 2px;color: #2ac845">置顶</span>
+								</div>
+								<div class="mui-col-xs-10 mui-ellipsis">
+									这是一篇置这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章顶文章
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2" style="text-align: center">
+									<span style="border: 1px solid #2ac845;border-radius: 2px;color: #2ac845">置顶</span>
+								</div>
+								<div class="mui-col-xs-10 mui-ellipsis">
+									这是一篇置这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章顶文章
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2" style="text-align: center">
+									<span style="border: 1px solid #2ac845;border-radius: 2px;color: #2ac845">置顶</span>
+								</div>
+								<div class="mui-col-xs-10 mui-ellipsis">
+									这是一篇置这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章这是一篇置顶文章顶文章
+								</div>
+							</div>
+						</a>
+					</li>
+
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10 pl-content">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+									<div class="pinglun-bg">
+										<div class="zan-container">
+											<span class="mui-icon-extra mui-icon-extra-heart"></span><span>张医生</span>
+										</div>
+										<ul class="mui-table-view">
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+									<div class="pinglun-bg">
+										<div class="zan-container">
+											<span class="mui-icon-extra mui-icon-extra-heart"></span><span>张医生</span>
+										</div>
+										<ul class="mui-table-view">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+				<ul class="mui-table-view" style="display: none">
+					<li class="mui-table-view-cell mui-media">
+						<div class="mui-row">
+							<div class="mui-col-xs-2">
+								<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+							</div>
+							<div class="mui-col-xs-10">
+								<span>与美丽同行</span>
+								<div>
+									<button>发帖</button>
+									<button>申请加入</button>
+								</div>
+							</div>
+						</div>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10 pl-content">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+									<div class="pinglun-bg">
+										<div class="zan-container">
+											<span class="mui-icon-extra mui-icon-extra-heart" style="color: #3996fd"></span><span class="user-name">张医生</span>
+										</div>
+										<ul class="mui-table-view">
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+											<li class="mui-table-view-cell">王大夫：说的很好</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+					<li class="mui-table-view-cell mui-media">
+						<a href="javascript:;">
+							<div class="mui-row">
+								<div class="mui-col-xs-2">
+									<img class="mui-media-object mui-pull-left" src="img/headpic1.png">
+								</div>
+								<div class="mui-col-xs-10">
+									<div class="mui-media-body">
+										陈蓉
+										<p class='no-tital-p'>现在临床医学科学对失眠的认识存在局限性，但是，临床医学家们已经开始根据临床研究，
+											给失眠进行定义，2012年中华医学会神经病学分会.失眠进行定义，2012年中华医学会神经病学失眠进行定义，
+											2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+											失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学失眠进行定义，2012年中华医学会神经病学
+										</p>
+									</div>
+									<p class="all-content">全部</p>
+									<img src="img/shequBG.png" width="100%">
+									<div class="positon-p">
+										<span>1小时前</span>
+										<span class="mui-icon-extra mui-icon-extra-comment p-pos"></span>
+										<div class="mui-row pop-zan">
+											<div class="mui-col-xs-6 dianzan">
+												<span class="mui-icon-extra mui-icon-extra-heart"></span>
+												<span>赞</span>
+											</div>
+											<div class="mui-col-xs-6 pinglun">
+												<span class="mui-icon mui-icon-chatboxes"></span>
+												<span>评论</span>
+											</div>
+										</div>
+									</div>
+									<div class="pinglun-bg">
+										<div class="zan-container">
+											<span class="mui-icon-extra mui-icon-extra-heart" style='color: #3996fd'></span><span class="user-name">张医生</span>
+										</div>
+										<ul class="mui-table-view">
+
+										</ul>
+									</div>
+								</div>
+							</div>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- off-canvas backdrop -->
+		<div class="mui-off-canvas-backdrop"></div>
+
+	</div>
+</div>
+<!--评论弹窗-->
+<div class="pop-pinglun">
+	<textarea rows="6"></textarea>
+	<div style="text-align: center">
+		<button id="concel" type="button" style="margin-right: 20px;">取消</button>
+		<button id="send" type="button" class="mui-btn mui-btn-success">发送</button>
+	</div>
+
+</div>
+
+<script>
+	mui.init();
+	mui.previewImage();
+	//侧滑容器父节点
+	var offCanvasWrapper = mui('#offCanvasWrapper');
+	//主界面容器
+	var offCanvasInner = offCanvasWrapper[0].querySelector('.mui-inner-wrap');
+	//菜单容器
+	var offCanvasSide = document.getElementById("offCanvasSide");
+
+	var mask = mui.createMask(hideTextArea);
+
+	//主界面和侧滑菜单界面均支持区域滚动；
+	mui('#offCanvasSideScroll').scroll();
+	mui('#offCanvasContentScroll').scroll();
+
+	var nowtip = null;//存储当前评论位置
+	var nowcol10 = null;//mui-col-xs-10
+
+	$("#ulContainer").children().eq(0).show();
+	/*头部标题切换*/
+	mui("#headerTitle")[0].addEventListener("tap",function(){
+		tapArrow();
+	});
+	mui("#tapClass").on('tap',"a",function(){
+		$("#headerTitle a").text($(this).text());
+		tapArrow();
+		var index = $(this).parent().index()
+		$("#ulContainer").children().eq(index).show().siblings().hide();
+		mui('#offCanvasContentScroll').scroll().scrollTo(0,0,1);
+	})
+
+	/*栏目切换箭头*/
+	function tapArrow(){
+		$("#tapClass").toggle();
+		if($("#tapClass").is(":hidden")){
+			$("#headerTitle").find("span").removeClass("mui-icon-arrowup").addClass("mui-icon-arrowdown");
+		}else {
+			$("#headerTitle").find("span").removeClass("mui-icon-arrowdown").addClass("mui-icon-arrowup");
+		}
+	}
+	function hideTap(){
+		$("#tapClass").hide();
+		if($("#tapClass").is(":hidden")){
+			$("#headerTitle").find("span").removeClass("mui-icon-arrowup").addClass("mui-icon-arrowdown");
+		}else {
+			$("#headerTitle").find("span").removeClass("mui-icon-arrowdown").addClass("mui-icon-arrowup");
+		}
+	}
+
+	/*搜索和消息跳转*/
+	mui(".mui-icon-search")[0].addEventListener("tap",function(){
+		mui.openWindow({
+			url:"社区内部搜索.html"
+		})
+	})
+	mui(".mui-icon-chat")[0].addEventListener("tap",function(){
+		mui.openWindow({
+			url:"消息.html"
+		})
+	})
+
+	/*显示全部和收起*/
+	mui("#ulContainer").on("tap",".all-content",function(){
+		if($(this).text() == "全部"){
+			$(this).prev().find("p").css("height","auto");
+			$(this).text('收起');
+		}else {
+			$(this).prev().find("p").css("height",128+"px");
+			$(this).text('全部');
+		}
+	})
+	/*评论和点赞*/
+	var username = "<span class='user-name'>刘医生</span>";
+	var thisname =null;
+	mui("#ulContainer").on('tap',".p-pos",function(){
+		hideTap();
+		$(".pop-zan").not($(this).next()).hide();
+		$(this).next().toggle();
+	})
+	offCanvasInner.addEventListener("scroll",function(){
+		hideTap();
+		$(".pop-zan").hide();
+	})
+	//	点赞
+	mui("#ulContainer").on("tap",".dianzan",function(){
+		$(this).parent().hide();
+		var contentContainer = $(this).parent().parent().parent();
+		var len = contentContainer.find(".pinglun-bg");
+		if(len.length){
+			var length = contentContainer.find(".zan-container").children().length;
+			if(length>0){
+				addZan(username,contentContainer,true);
+			}else {
+				addZan(username,contentContainer,false);
+			}
+		}else {
+			createPingLunQu(contentContainer);
+			addZan(username,contentContainer,false)
+			/*var tip = $(this).parent().parent().parent();
+			 var container = createPingLunQu(tip);
+			 addZan("刘医生",container);*/
+		}
+
+	})
+	function createPingLunQu(container){
+		var pl = $("<div class='pinglun-bg'><div class='zan-container'></div><ul class='mui-table-view'></ul></div>")
+		container.append(pl);
+	}
+	function addZan(name,container,boolean){
+		if(boolean){
+			var namespan = $("<span>,"+ name +"</span>")
+		}else {
+			var namespan = $("<span class='mui-icon-extra mui-icon-extra-heart' style='color: #3996fd'></span><span>"+ name +"</span>")
+		}
+		container.find(".zan-container").append(namespan);
+	}
+	//	评论
+	mui("#ulContainer").on("tap",".pinglun",function(){
+		$(this).parent().hide();
+		nowtip = $(this).parent().parent().parent().find(".pinglun-bg");
+		nowcol10 = $(this).parent().parent().parent();
+		$(".pop-pinglun").find("textarea").attr("placeholder",'');
+		showTextArea();
+	})
+	function addPingLun(name,content,container,boolean){
+		/*var length = container.children().length;*/
+		console.log(typeof boolean);
+		if(boolean == "true"){
+			var name = name + "回复" +"<span class='user-name'>"+thisname+"</span>"
+		}
+		var li = $("<li class='mui-table-view-cell'>"+ name +"：" + content + "</li>")
+		container.children().eq(1).append(li);
+	}
+	/*发送和取消*/
+	mui("#send")[0].addEventListener("tap",function(){
+		var textarea = $(".pop-pinglun").find("textarea");
+		var text = textarea.val();
+		var boo = $(this).attr("reply");
+		if(text){
+			$(".pop-pinglun").css("top",-240+"px");
+			mask.close();//显示遮罩
+			if(nowtip.length){
+				addPingLun(username,text,nowtip,boo);
+			}else {
+				createPingLunQu(nowcol10);
+				var container = nowcol10.find(".pinglun-bg");
+				addPingLun(username,text,container);
+			}
+			textarea.val('');
+			$(this).attr("reply",false);
+		}else {
+			alert("回复不能为空");
+		}
+
+	})
+	mui("#concel")[0].addEventListener("tap",function(){
+		$(".pop-pinglun").css("top",-240+"px");
+		mask.close();//显示遮罩
+	})
+	function fasong(isreply){
+
+	}
+	/*隐藏输入框*/
+	function hideTextArea(){
+		$(".pop-pinglun").css("top",-240+"px");
+	}
+	/*弹出输入框*/
+	function showTextArea(content){
+		$(".pop-pinglun").find("textarea").attr("placeholder",content);
+		mask.show();//显示遮罩
+		$(".pop-pinglun").css("top",0);
+	}
+	//给每条回复绑定点击事件
+	mui(".pl-content").on("tap","li",function(){
+		nowtip = $(this).parent().parent();
+		nowcol10 = $(this).parent().parent().parent();
+		thisname = $(this).find(".user-name").eq(0).text();
+		var str = "@"+thisname;
+		showTextArea(str);
+		$("#send").attr("reply",true);
+	})
+	//给每个文章绑定点击事件
+	mui("#ulContainer").on("tap",".index-wenzhang",function(){
+		openPage("文章详情.html")
+	})
+	//给每个头像绑定点击事件
+	mui("#ulContainer").on("tap",".mui-media-object",function(){
+		openPage("其他用户个人主页.html")
+	})
+	/*侧滑菜单跳转*/
+	function openPage(url){
+		mui.openWindow({
+			url:url
+		})
+	}
+</script>
+</body>
+</html>

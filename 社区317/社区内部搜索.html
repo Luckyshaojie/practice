@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/mui.css"/>
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <style>
+        *{
+            font-family: '微软雅黑';
+        }
+        #ssLishi,#ssTuijian{
+            padding-left: 30px;
+            padding-right: 15px;
+        }
+        .lishi{
+            display: inline-block;
+            height: 30px;
+            line-height: 30px;
+            margin: 15px 6px;
+            border: 1px solid #3996fd;
+            -webkit-border-radius: 7px;
+            -moz-border-radius: 7px;
+            border-radius: 7px;
+            padding: 0px 19px;
+            font-size: 14px;
+            background: #3996fd;
+            color: white;
+        }
+        .p{
+            text-indent: 1em;
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+<body>
+<header id="header" class="mui-bar mui-bar-nav">
+    <div class="mui-input-row mui-search"  id="searchDiv" style="width: 75%;
+    margin-left: 2%;
+    display: inline-block;">
+        <input type="search" id="sousuo" class="mui-input-clear" placeholder="搜索">
+    </div>
+    <a class="mui-action-back mui-pull-left" style="font-size:1rem;padding-left: 5px;padding-top:10px">取消</a>
+    <a class="mui-icon mui-icon-search mui-pull-right"></a>
+</header>
+<div class="mui-content">
+    <p class="p">历史纪录</p>
+    <div id="ssLishi">
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+        <span class="lishi">历史</span>
+
+
+    </div>
+    <p class="p">推荐搜索</p>
+    <div id="ssTuijian">
+        <span class="lishi">推荐</span>
+        <span class="lishi">推荐</span>
+        <span class="lishi">推荐</span>
+        <span class="lishi">推荐</span>
+        <span class="lishi">推荐</span>
+
+
+    </div>
+
+
+</div>
+</body>
+<script>
+    mui.init({
+        swipeBack: false
+    })
+    /*页面初始化完成的事件 搜索框获取焦点*/
+    window.onload=function(){
+        $("#sousuo").focus();
+        mui.trigger("#searchDiv","tap")
+    };
+</script>
+</html>

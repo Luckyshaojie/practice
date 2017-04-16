@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>社区首页</title>
+    <link rel="stylesheet" href="css/mui.css"/>
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript" src="js/mui.min.js"></script>
+    <style type="text/css">
+        .head-bg{
+            background-image: url(img/sq_bg_img2.jpg);
+            background-size: cover;
+            position: relative;
+        }
+        .head-bg .mui-col-xs-12{
+            text-align: center;
+            color: #fff;
+        }
+        .center-guanzhu{
+            padding: 10px;
+            background-color: #fff;
+        }
+        .center-guanzhu p{
+            font-size: 16px;
+        }
+        .guanzhu-pos   {
+            color: #fff;
+            padding: 4px 8px;
+            position: absolute;
+            right: 5%;
+            top: 11%;
+            background-color: transparent;
+        }
+        /*动态列表样式*/
+        .body .mui-table-view .mui-media-object{
+            line-height: 66px;
+            max-width: 66px;
+            height: 66px;
+            margin-left: 6px;
+        }
+        .no-tital-p{
+            height: 60px;
+            background-color: #eee;
+        }
+        .body .mui-media-body{
+            color: #333;
+        }
+        .all-content{
+            color: #3996fd;
+        }
+        .p-pos{
+            font-size: 18px;
+            line-height: 1.4;
+            opacity: .8;
+            position: absolute;
+            right: 0;
+        }
+        .positon-p{
+            color: #666;
+            font-size: 14px;
+            position: relative;
+        }
+        .pop-zan{
+            color: #fff;
+            width: 140px;
+            height: 30px;
+            background-color: #000;
+            padding: 4px;
+            opacity: .6;
+            position: absolute;
+            right: 34px;
+            bottom: -6px;
+            display: none;
+            z-index: 14;
+        }
+        .pop-zan::after{
+            width: 0;
+            height: 0;
+            border-left: 14px solid #000;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 6px solid transparent;
+            position: absolute;
+            content: '';
+            right: -22px;
+            top: 2px;
+
+        }
+        /*重写样式*/
+        .mui-table-view-cell > a:not(.mui-btn){
+            white-space: normal;
+        }
+
+        /*头部样式*/
+        #tapClass{
+            width: 40%;
+            margin: 0;
+            position: absolute;
+            top: 44px;
+            left: 30%;
+            z-index: 11;
+            display: none;
+        }
+        #sanjiao{
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 12px solid #fff;
+            position: absolute;
+            top: 22px;
+            left: 46%;
+            z-index: 11;
+        }
+        #tapClass .mui-table-view-cell:after{
+            right: 15px;
+        }
+        #headImg img{
+            width: 44px;
+        }
+        /*评论区*/
+        .pinglun-bg{
+            position: relative;
+            width: 100%;
+            height: auto;
+            padding: 6px;
+            background-color: #eee;
+            margin-top: 10px;
+        }
+        .pinglun-bg::before{
+            content: '';
+            width: 0;
+            height: 0;
+            border-left: 12px solid transparent;
+            border-top: 12px solid transparent;
+            border-right: 12px solid transparent;
+            border-bottom: 12px solid #eee;
+            position: absolute;
+            top: -20px;
+            left: 4%;
+        }
+        .zan-container{
+            color: #666;
+            font-size: 14px;
+            width: 100%;
+            padding: 4px;
+        }
+        .zan-container .mui-icon-extra{
+            font-size: 16px;
+        }
+        .pinglun-bg .mui-table-view{
+            color: #666;
+            font-size: 14px;
+            background-color: transparent;
+        }
+        .pinglun-bg .mui-table-view-cell{
+            overflow: visible;
+            padding: 1px 10px;
+        }
+        .pinglun-bg .mui-table-view-cell:after{
+            background-color: transparent;
+        }
+        .pinglun-bg .mui-table-view:after{
+            background-color: transparent;
+        }
+        .pop-pinglun{
+            height: 220px;
+            width: 90%;
+            padding: 10px;
+            background-color: #fff;
+            z-index: 999;
+            position: fixed;
+            left: 5%;
+            top: -240px;
+            transition: all 0.4s;
+            -moz-transition: all 0.4s;
+            -webkit-transition: all 0.4s;
+            -o-transition:all 0.4s;
+        }
+        @media screen and (min-width:320px) and (max-width:374px) {
+            .textImg{
+                padding: 7px 10px;
+                margin-top: 5px;
+
+            }
+            .scImg img{
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+            .content{
+                font-size: 14px;
+                height: 41px;
+                overflow: hidden;
+                padding-left: 5px;
+            }
+            .tI{
+                background-color: #fff;
+                padding: 5px;
+                margin-top: -10px;
+            }
+            .tI h6{
+                padding-left: 5px;
+                margin-top: -5px;
+
+            }
+            .textDate{
+                font-weight: 500;
+                font-size: 20px;
+            }
+            .list{
+                margin-top: 10px;
+            }
+        }
+        @media screen and (min-width:375px) and (max-width:2000px) {
+            .textImg{
+                padding: 7px 10px;
+                margin-top: 5px;
+
+            }
+            .scImg img{
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+            .content{
+                font-size: 15px;
+                height: 41px;
+                overflow: hidden;
+                padding-left: 5px;
+            }
+            .tI{
+                background-color: #fff;
+                padding: 5px;
+                margin-top: -10px;
+            }
+            .tI h6{
+                padding-left: 5px;
+                margin-top: -5px;
+                font-size: 14px;
+
+            }
+            .textDate{
+                font-weight: 500;
+                font-size: 20px;
+            }
+            .list{
+                margin-top: 10px;
+            }
+        }
+
+    </style>
+</head>
+<body class="body">
+<header id="header" style="position: fixed; top: 0;" class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left" ></a>
+    <h1 class="mui-title">TA的主页</h1>
+</header>
+<div id="contentid" class="mui-content">
+    <div class="mui-row head-bg">
+        <div class="mui-col-xs-12" style="padding-top: 2rem;padding-bottom: 1rem;">
+            <img id="imgID" src="img/userImg.jpg" width="24%" style="border-radius: 50%;">
+        </div>
+        <div class="mui-col-xs-12">
+            <span>陈蓉</span>
+        </div>
+        <div class="mui-col-xs-12" style="text-align: center;font-size: 14px;margin: 10px 0;">
+            <span>社区排名：3</span><!--  <span class="mui-icon mui-icon-help"></span>-->
+        </div>
+        <button id="guanzhu" type="button" class="guanzhu-pos">+关注</button>
+    </div>
+    <div class="mui-row center-guanzhu">
+        <div class="mui-col-xs-6">
+            <p>TA关注的人</p>
+            <p id='tgz' style="font-size: 20px;color: #3d3d3d">12</p>
+        </div>
+        <div class="mui-col-xs-6">
+            <p>关注TA的人</p>
+            <p id='gzt'style="font-size: 20px;color: #3d3d3d">4</p>
+        </div>
+    </div>
+    <div class="mui-row center-guanzhu">
+        <div class="mui-col-xs-2">
+            <img src="img/sq_zan.png" width="20"><span>42</span>
+        </div>
+        <div class="mui-col-xs-2">
+            <img src="img/sq_shoucang.png" width="20"><span>42</span>
+        </div>
+    </div>
+    <div id="textList">
+        <div id="11月" class="list">
+            <div class="mui-row textImg" >
+                <div class="mui-col-xs-2 textDate">
+                    11月
+                </div>
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+                        <div class="mui-col-xs-3 scImg">
+                            <img src="img/sq_bg_img1.png" alt=""/>
+                        </div>
+                        <div class="mui-col-xs-9 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                            <h6>共3张</h6>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="mui-row textImg" >
+                <div class="mui-col-xs-2 textDate">
+                </div>
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+                        <div class="mui-col-xs-12 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="10月" class="list">
+            <div class="mui-row textImg">
+
+                <div class="mui-col-xs-2 textDate">
+                    10月
+                </div>
+
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+
+                        <div class="mui-col-xs-12 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="mui-row textImg" >
+                <div class="mui-col-xs-2 textDate">
+                </div>
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+                        <div class="mui-col-xs-12 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div id="09月" class="list">
+            <div class="mui-row textImg"  style="">
+                <div class="mui-col-xs-2 textDate">
+                    09月
+                </div>
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+                        <div class="mui-col-xs-12 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="mui-row textImg" >
+
+                <div class="mui-col-xs-2 textDate">
+
+                </div>
+                <div class="mui-col-xs-10">
+                    <div class="mui-row tI">
+                        <div class="mui-col-xs-3 scImg">
+                            <img src="img/sq_bg_img1.png" alt=""/>
+                        </div>
+                        <div class="mui-col-xs-9 scText">
+                            <p class="content">我的收藏我的收藏我的收藏我的收藏我的收藏我...</p>
+                            <h6>共3张</h6>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--初始化MUI框架代码-->
+<script>
+    mui.init();
+    mui("#textList").on('tap','.tI',function(){
+        mui.openWindow({
+            url:"动态详情.html"
+        })
+    })
+    mui("#contentid").on("tap",'#guanzhu',function(){
+              if(  $("#guanzhu").html().toString().trim()=="+关注"){
+                  $("#guanzhu").html('取消关注');
+                  $("#gzt").html(parseInt($("#gzt").html())+1);
+                }else{
+                  $("#guanzhu").html('+关注');
+                  $("#gzt").html(parseInt($("#gzt").html())-1);
+                }
+
+    })
+
+
+</script>
+<!--手写JS-->
+</body>
+</html>

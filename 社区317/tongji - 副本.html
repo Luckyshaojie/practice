@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>社区统计</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="//cdn.bootcss.com/echarts/3.3.1/echarts.min.js"></script>
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/mui-icon-extra.css">
+    <style type="text/css">
+        .li_pad{
+            padding-top: 10px;
+            padding-bottom: 6px;
+            border-bottom: 1px solid #eee;
+        }
+        td, th{
+            padding: 6px;
+        }
+        .mui-table-view-cell:after{
+            background-color: transparent;
+        }
+        .echart_container{
+            width: 100%;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">社区统计</h1>
+</header>
+<div class="mui-content">
+    <!--切换社区-->
+    <div class="mui-row">
+        <ul class="mui-table-view">
+            <li class="mui-table-view-cell mui-collapse">
+                <a class="mui-navigate-right" href="#">切换社区</a>
+                <div class="mui-collapse-content">
+                    <div class="mui-input-row li_pad">乳腺癌社区</div>
+                    <div class="mui-input-row li_pad">乳腺癌专业社区</div>
+                    <div class="mui-input-row li_pad">与美丽同行社区</div>
+                    <div class="mui-input-row li_pad">乳腺癌专业社区</div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <h4 id="headtext" style="text-align: center; padding-top: 10px;padding-bottom: 10px;">乳腺癌社区统计</h4>
+    <!--数据表单-->
+    <div id="form" class="mui-row mui-input-group" style="text-align: center;">
+        <table class="mui-table-boder" style="width: 100%">
+            <tbody>
+            <tr class="mui-table-view-cell" style="font-size: .9rem;">
+                <th>周期</th>
+                <th>医生数量</th>
+                <th>患者数量</th>
+                <th>文章量</th>
+                <th>活跃度</th>
+                <th>浏览量</th>
+            </tr>
+            <tr class="mui-table-view-cell">
+                <td>日</td>
+                <td>20</td>
+                <td>100</td>
+                <td>99</td>
+                <td>140</td>
+                <td>219</td>
+            </tr>
+            <tr class="mui-table-view-cell">
+                <td>周</td>
+                <td>40</td>
+                <td>320</td>
+                <td>699</td>
+                <td>770</td>
+                <td>1212</td>
+            </tr>
+            <tr class="mui-table-view-cell">
+                <td>月</td>
+                <td>45</td>
+                <td>432</td>
+                <td>929</td>
+                <td>1400</td>
+                <td>2149</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <!--统计图区-->
+    <p style="margin-top: 20px;">周视图</p>
+    <div id="main" class="mui-row echart_container">
+
+    </div>
+    <p style="margin-top: 20px;">年视图</p>
+    <div id="main2" class="mui-row echart_container">
+
+    </div>
+</div>
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('main'));
+    var myChart2 = echarts.init(document.getElementById('main2'));
+    // 指定图表的配置项和数据
+    var option = {
+        title: {
+
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['医生数量','患者数量','文章量','活跃度','浏览量']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        oolbox: {
+            feature: {
+                saveAsImage: {type:'png',show:true,title:'保存为图片'}
+            },
+            dataView:{show:true,title:"数据试图"}
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['周一','周二','周三','周四','周五','周六','周日']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        backgroundColor: "#fff" ,
+        series: [
+            {
+                name:'医生数量',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210]
+            },
+            {
+                name:'患者数量',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310]
+            },
+            {
+                name:'文章量',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410]
+            },
+            {
+                name:'活跃度',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320]
+            },
+            {
+                name:'浏览量',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320]
+            }
+        ]
+    };
+    var option2 = {
+        title: {
+
+        },
+        tooltip: {
+            trigger: 'axis'
+        },
+        legend: {
+            data:['医生数量','患者数量','文章量','活跃度','浏览量']
+        },
+        grid: {
+            left: '3%',
+            right: '4%',
+            bottom: '3%',
+            containLabel: true
+        },
+        xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月','十二月']
+        },
+        yAxis: {
+            type: 'value'
+        },
+        backgroundColor: "#fff" ,
+        series: [
+            {
+                name:'医生数量',
+                type:'line',
+                stack: '总量',
+                data:[120, 132, 101, 134, 90, 230, 210,120, 132, 101, 134, 90]
+            },
+            {
+                name:'患者数量',
+                type:'line',
+                stack: '总量',
+                data:[220, 182, 191, 234, 290, 330, 310,220, 182, 191, 234, 290,]
+            },
+            {
+                name:'文章量',
+                type:'line',
+                stack: '总量',
+                data:[150, 232, 201, 154, 190, 330, 410,150, 232, 201, 154, 190]
+            },
+            {
+                name:'活跃度',
+                type:'line',
+                stack: '总量',
+                data:[320, 332, 301, 334, 390, 330, 320,320, 332, 301, 334, 390]
+            },
+            {
+                name:'浏览量',
+                type:'line',
+                stack: '总量',
+                data:[820, 932, 901, 934, 1290, 1330, 1320,820, 932, 901, 934,1231]
+            }
+        ]
+    };
+    // 使用刚指定的配置项和数据显示图表。
+    myChart.setOption(option);
+    myChart2.setOption(option2);
+</script>
+</body>
+</html>

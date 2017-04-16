@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<!--兼容IE-Edge-->
+		<meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+		<!--保持与当前窗口一样的大小-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>社区首页</title>
+		<link rel="stylesheet" href="css/mui.css" />
+		<link rel="stylesheet" href="css/mui-icon-extra.css"/>
+		<script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+		<script  type="text/javascript" src="js/mui.min.js"></script>
+		<style type="text/css">
+				/*------------------重新设定系统默认的标签或类样式-----------------*/
+				.mui-slider .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-group .mui-slider-item {
+				border-top: 1px solid #c8c7cc;
+			 border-bottom: 0px solid #c8c7cc;
+			}
+				*{
+					font-family: '微软雅黑'; /*所有字体都是微软雅黑	*/
+
+				}
+				ul,li{
+					list-style: none;
+					margin-left: 0;
+				}
+				body,.mui-content{
+					background: #Fff;
+				}
+				.GrayLine{
+					width: 100%;
+					height:4px;
+					background: #ddd;
+				}
+				/*********************选项卡1内容样式（选择社区）*****************************/
+				.indexTopName{
+					font-size: 1.3rem;
+					color:#fff;
+				}
+				#returnMHT{
+					font-size: 1rem;
+					padding-top: 15px;
+					color: #fff;
+				}
+				.topHeader{
+					background: #0267ff;
+				}
+				#search{
+					font-size: 0.6rem;
+					background: #ccc;
+					padding-top: 0.5rem;    height: 50px;
+				}
+				#search>div{
+					width: 95%;
+					margin-left: 2%;
+				}
+				#inputSearch,#tabLine{
+					background: #fff;
+				}
+				#wode>p:nth-child(1){
+					padding-bottom: 0.2rem;
+					width: 86%;
+					margin-left: 7%;
+					margin-top: 0.5rem;
+					text-align: center;
+				}
+				#tuijian h3{
+						text-align: center;
+					color: #ccc;
+				}
+				#zanwutuijian{
+					margin: auto;
+					width: 50%;margin-top: 5%;
+				}
+				#shouye .seacher{
+					text-align: center;
+					border-radius: 6px;
+					background-color: #fff;
+				}
+				/*********************选项卡2内容样式(热门文章)*****************************/
+				.card{
+					margin-top: 1rem;
+				}
+				.card-header{
+					height: 2rem;
+				}
+				.card-header .UserImg{
+					display: inline-block;
+					width:2rem;
+					height: 2rem;
+
+				}
+				.card-header img{
+					width: 100%;
+					vertical-align: middle;
+					-webkit-border-radius: 100%;
+					-moz-border-radius: 100%;
+					border-radius: 100%;
+					margin-left: -7px;
+					margin-top:5px;
+				}
+				.card-header strong{
+					font-weight: 500;
+				}
+				.card-content img{
+					width: 100%;
+				}
+				.contentText img{
+					width: 40px;
+					height: 40px;
+					vertical-align: middle;
+					border-radius: 2px;
+					margin-right: 10px;
+				}
+				.contentText span:nth-child(2){
+					display:inline-block;
+					width:75%;
+					
+				}
+				.card-content h5{
+					font-weight: 600;
+					font-size:1rem;
+					color: #3d3d3d;
+					padding:0 15px;
+				margin-top: 10px;
+				}
+				.card-content p{
+					padding:0 15px;
+					color: #333;
+					margin-top: 10px;
+				}
+
+				#yijiarushequ .shequName{
+					font-size: 1rem;
+					font-weight: 400;
+				}
+				#yijiarushequ img{
+					width: 35px;
+					height: 35px;
+					vertical-align: middle;
+					margin-right: 10px;
+				}
+
+				.card-footer{
+					font-size: 0.5rem;
+				}
+				/*********************选项卡3内容样式（消息中心）*****************************/
+				#xiaoxi ul img{
+					width:31px;
+					height:31px;
+					vertical-align: middle;
+					margin-right: 10px;
+				}
+				/*********************选项卡4内容样式（社区中心）*****************************/
+				#wo .woheader {
+					background:url(img/u170.jpg) no-repeat;
+					background-size: 100%;
+				}
+				#wo h3{
+					 text-align: center;
+					 color:#fff;
+					 font-weight: 500;
+					 padding-bottom: 10px;
+					font-size: 1.2rem;
+				 }
+				#wo h4{
+					text-align: center;
+					color:#fff;
+					font-weight: 500;
+					padding-bottom: 10px;
+					font-size: 1rem;
+				}
+				#wo .woheader img{
+					width: 26%;
+					margin-left:37%;
+					border-radius: 100%;
+					margin-top: 5%;;
+				}
+
+				#woTab .info{
+					text-align: center;
+					padding-bottom: 5px;
+					border-bottom: 2px solid lightgray;
+					color:darkgrey;
+					font-size: 14px;
+					height: 30px;
+				}
+				#woTab>div>.active{
+					border-bottom: 2px solid #0095ff;
+					color: #0095ff;
+				}
+				.guanzhu{
+					font-weight: 500;
+				}
+				#xinxiTab ul li{
+					font-size: 0.8rem;
+				}
+
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav topHeader">
+			<a class="mui-icon mui-pull-left" id="returnMHT">退出</a>
+			<h1 class="mui-title indexTopName">社区</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+			<a class="mui-tab-item mui-active" href="#shouye">
+				<span class="mui-icon mui-icon-home"></span>
+				<span class="mui-tab-label">首页</span>
+			</a>
+			<a class="mui-tab-item" href="#dongtai">
+				<span class="mui-icon mui-icon-pengyouquan"></span>
+				<span class="mui-tab-label">动态</span>
+			</a>
+			<a class="mui-tab-item" href="#xiaoxi">
+				<span class="mui-icon  mui-icon-chat"><span class="mui-badge">9</span></span>
+				<span class="mui-tab-label">消息</span>
+			</a>
+			<a class="mui-tab-item" href="#wo">
+				<span class="mui-icon mui-icon-contact"></span>
+				<span class="mui-tab-label">社区中心</span>
+			</a>
+		</nav>
+		<div class="mui-content">
+			<!--选项卡1（选择社区）-->
+			<div id="shouye" class="mui-control-content mui-active">
+				<!--搜索框-->
+				<div style="padding: 10px;background-color: #eee;">
+					<div class="seacher">
+						<span id="inputSearch" class="mui-icon mui-icon-search" style="padding: 10px;font-size: 16px;">搜索</span>
+					</div>
+				</div>
+				<!--选项卡切换栏-->
+				<div id="tabLine">
+					<!--MUI选项卡-->
+					<div id="slider" class="mui-slider">
+						<!--选项卡选项-->
+						<div id="shequTab" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+							<a class="mui-control-item mui-active" href="#wode">我的社区</a>
+							<a class="mui-control-item" href="#tuijian">推荐社区</a>
+						</div>
+						<!--tab选项底线-->
+						<div id="tabBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+						<!--选项卡内容-->
+						<div class="mui-slider-group">
+							<!--我的社区-->
+							<div id="wode" class="mui-slider-item mui-control-content mui-active">
+									<!--<p style="border-bottom: 1px solid lightgrey;">已加入</p>-->
+									<!--医生加入的社区列表-->
+									<div id="yijiarushequ">
+										<ul class="mui-table-view">
+											<li class="mui-table-view-cell">
+												<a  href="javascript:openwebView('社区首页.html','乳腺肿瘤社区')">
+													<img src="img/u64.png" alt=""/>
+													<span class="shequName">"与美丽同行"乳腺肿瘤社区</span>
+												</a>
+											</li>
+											<li class="mui-table-view-cell">
+												<a  href="javascript:">
+													<img src="img/u75.png" alt=""/>
+													<span class="shequName">"与美丽同行"乳腺肿瘤社区</span>
+												</a>
+											</li>
+											<li class="mui-table-view-cell">
+												<a  href="javascript:">
+													<img src="img/u77.png" alt=""/>
+													<span class="shequName">月经不调交流社区</span>
+												</a>
+											</li>
+
+
+										</ul>
+									</div>
+								</div>
+							<!--推荐社区-->
+							<div id="tuijian" class="mui-slider-item mui-control-content">
+									 <div id="zanwutuijian">
+										 <img src="img/u80.png" alt=""/>
+									 </div>
+									<h3>暂无推荐</h3>
+								</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!--选项卡2（热门动态）-->
+			<div id="dongtai" class="mui-control-content">
+				<!--每一个包含card类的是一条动态-->
+				<div class="mui-card card">
+					<!--页眉，放置标题-->
+					<div class="mui-card-header card-header">
+						<p>
+							<span class="UserImg"><img src="img/UserImg.jpg" alt=""/></span>
+							<strong>陈 蓉</strong>
+						</p>
+					</div>
+					<!--内容区-->
+					<div class="mui-card-content card-content">
+						<div class="contentImg" style="display: none">
+							<img src="img/u136.png" alt=""/>
+						</div>
+						<h5  style="display: none">失眠的病人如何克服焦虑？</h5>
+						<p class="contentText mui-row">
+							<span class="mui-col-sm-4"><img src="img/u136.png" alt=""/></span>
+							<span class="mui-col-sm-8">焦虑症的患者经常诉说总是心烦意乱，莫.....</p>
+						</p>
+					</div>
+					<!--页脚，放置补充信息或支持的操作-->
+					<div class="mui-card-footer card-footer">
+						<div>
+							赞同 <span class="zantong" data-num="12">12</span>&nbsp;&nbsp;&nbsp;
+							浏览量 <span class="liulanliang" data-num="1223">1223</span>&nbsp;&nbsp;&nbsp;
+							<span class="guanzhu">关注作者</span>
+						</div>
+
+					</div>
+				</div>
+				<div class="mui-card card">
+					<!--页眉，放置标题-->
+					<div class="mui-card-header card-header">
+						<p>
+							<span class="UserImg"><img src="img/UserImg.jpg" alt=""/></span>
+							<strong>陈 蓉</strong>
+						</p>
+					</div>
+					<!--内容区-->
+					<div class="mui-card-content card-content">
+						<div class="contentImg" style="display: none">
+							<img src="img/u136.png" alt=""/>
+						</div>
+						<h5 style="display: none">失眠的病人如何克服焦虑？</h5>
+						<p class="contentText">
+							焦虑症的患者经常诉说总是心烦意乱，莫明的紧张感，坐立不安，胡思乱想.....
+						</p>
+					</div>
+					<!--页脚，放置补充信息或支持的操作-->
+					<div class="mui-card-footer card-footer">
+						<div>
+							赞同 <span class="zantong" data-num="12">12</span>&nbsp;&nbsp;&nbsp;
+							浏览量 <span class="liulanliang" data-num="1223">1223</span>&nbsp;&nbsp;&nbsp;
+							<span class="guanzhu">已关注</span>
+						</div>
+
+					</div>
+				</div>
+
+
+
+			</div>
+			<!--选项卡3（消息）-->
+			<div id="xiaoxi" class="mui-control-content">
+				<div class="GrayLine"></div>
+				<ul class="mui-table-view mui-table-view-chevron">
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<span class="mui-badge mui-badge-danger">5</span>
+							<img src="img/评论.png" alt=""/>评论我的
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<span class="mui-badge mui-badge-danger">3</span>
+							<img src="img/私信.png" alt=""/>私信我的
+						</a>
+					</li>
+					<li class="mui-table-view-cell">
+						<a class="mui-navigate-right">
+							<span class="mui-badge mui-badge-danger">1</span>
+							<img src="img/通知.png" alt=""/>社区通知
+						</a>
+					</li>
+				</ul>
+			</div>
+			<!--选项卡4（社区中心） -->
+			<div id="wo" class="mui-control-content">
+						<!--个人信息-->
+						<div class="woheader">
+							<div id="woImg"><img src="img/UserImg.jpg" alt=""/></div>
+							<h3 id="woName">陈蓉</h3>
+							<h4 id="woYiyuan">北京协和医院</h4>
+						</div>
+						<!--切换卡-->
+						<div id="woTab">
+							<!--选项-->
+							<div class="mui-row">
+									<div class="mui-col-xs-6 info active" data-showid="geren">个人主页</div>
+									<div class="mui-col-xs-6 info " data-showid="xiangxi">详细信息</div>
+							</div>
+							<!--选项对应的内容-->
+							<div id="xinxiTab">
+								<!--个人主页-->
+								<div id="geren" style="display: block">
+									<div class="mui-row">
+											<div class="mui-col-xs-6 guanzhu"  id="wogaunzhuderen">
+												<p  style="padding-left: 10px;margin-top: 5px">我的关注人</p>
+												<h2 style="padding-left: 10px; font-weight:500;font-size: 1.4rem;padding-bottom: 5px">12</h2>
+											</div>
+											<div class="mui-col-xs-6 guanzhu " id="guanzhuwoderen">
+												<p style="padding-left: 10px;margin-top: 5px">关注我的人</p>
+												<h2 style="padding-left: 10px;font-weight:500;font-size: 1.4rem;padding-bottom: 5px">122</h2>
+											</div>
+											<div class="mui-col-xs-3" style="font-size:16px;color:#777;padding-bottom: 10px;padding-left: 10px">
+												<span class="mui-icon-extra mui-icon-extra-heart-filled" style="font-size: 16px;"></span>
+												&nbsp;<span>212</span>
+											</div>
+											<div class="mui-col-xs-3" style="font-size:16px;color:#777;padding-bottom: 10px">
+												<span class="mui-icon-extra mui-icon-extra-like" style="font-size: 16px;"></span>
+												&nbsp;<span>143</span>
+											</div>
+												<!--空地-->
+											<div class="mui-col-xs-6">
+
+
+											</div>
+									</div>
+									<div class="GrayLine"></div>
+									<ul class="mui-table-view" id="admin"  style="display: none">
+										<li class="mui-table-view-cell">社区审核管理
+											<span class="mui-badge mui-badge-primary">11</span>
+										</li>
+										<li class="mui-table-view-cell">社区审核管理
+											<span class="mui-badge mui-badge-primary">11</span>
+										</li>
+										<li class="mui-table-view-cell">社区审核管理
+											<span class="mui-badge mui-badge-primary">11</span>
+										</li>
+									</ul>
+									<div class="GrayLine"></div>
+									<ul class="mui-table-view">
+										<li class="mui-table-view-cell">我的发布
+											<span class="mui-badge ">11</span>
+										</li>
+
+										<li class="mui-table-view-cell">我的收藏
+											<span class="mui-badge ">22</span>
+										</li>
+										<li class="mui-table-view-cell">我的回复
+											<span class="mui-badge">33</span>
+										</li>
+										<li class="mui-table-view-cell">我的审核
+											<span class="mui-badge ">11</span>
+										</li>
+										<li class="mui-table-view-cell">草稿箱
+											<span class="mui-badge ">22</span>
+										</li>
+										<li class="mui-table-view-cell">退稿箱
+											<span class="mui-badge">33</span>
+										</li>
+										<li class="mui-table-view-cell">浏览历史
+
+										</li>
+									</ul>
+								</div>
+								<!--详细信息-->
+								<div id="xiangxi" style="display:none">
+									 医生详细信息
+								</div>
+							</div>
+						</div>
+			</div>
+		</div>
+	</body>
+	<!--初始化MUI框架代码-->
+	<script>
+		mui.init({
+			swipeBack: false
+		})(mui);
+
+	</script>
+	<!--手写JS-->
+	<script>
+			/*打开新页面*/
+			function openwebView(url,id){
+				mui.openWindow({
+					url:url,
+					id:id
+				})
+			}
+			/*个人信息和详细信息的Tab切换显示*/
+			mui("#woTab").on("tap",".info",function(){
+				$("#wode .active").removeClass("active");
+				$(this).addClass("active");
+				$("#xinxiTab>div").css("display","none");
+				if(this.innerText=="详细信息"){
+
+					console.log($(this).context.dataset["showid"]);
+					$("#"+$(this).context.dataset["showid"]).css("display","block");
+				}else{
+					console.log($(this).context.dataset["showid"]);
+					$("#"+$(this).context.dataset["showid"]).css("display","block");
+				}
+			})
+			mui("#inputSearch")[0].addEventListener('tap',function(){
+				openwebView("社区内部搜索.html")
+			})
+	</script>
+</html>

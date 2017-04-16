@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <script src="js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="js/mui.min.js"></script>
+    <script src="js/mui.zoom.js"></script>
+    <script src="js/mui.previewimage.js"></script>
+    <link rel="stylesheet" href="css/mui.min.css">
+    <link rel="stylesheet" href="css/mui-icon-extra.css">
+    <style>
+        *{
+            font-family: '微软雅黑';
+        }
+        #lunbo img{
+            height: 135px;
+        }
+        .mui-slider-title{
+            color:#fff;
+        }
+        .mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+            color: #007aff;
+            border-bottom: 0px solid #007aff;
+            background: 0 0;
+            color: #fff;
+        }
+        .mui-slider-indicator.mui-segmented-control {
+            position: relative;
+            bottom: auto;
+            background: red;
+            color: #ddd;
+        }
+        #zhidin .mui-table-view-cell {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+            height: 40px;
+            line-height:40px;
+            padding: 0px;
+            text-indent: 0.5em;
+            background-color: #f7f7f7;
+            font-size: 0.8rem;
+
+        }
+        #zhidin li>span{
+            padding: 3px 2px;
+            color: #dd524d;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            border:1px solid #dd524d;
+            margin-right: 5px;
+
+        }
+        .mui-table-view .mui-media-object.mui-pull-left {
+            margin-right: 13px;
+            height: 60px;
+            width: 85px;
+        }
+        .mui-table-view .mui-media-object {
+            line-height: 42px;
+            max-width: 100px;
+            height: 55px;
+        }
+        .mui-table-view-cell>a:not(.mui-btn) {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: -11px -15px;
+            padding: inherit;
+            white-space: inherit;
+            text-overflow: ellipsis;
+            color: inherit;
+        }
+        .mui-bar-nav~.mui-content {
+            padding-top: 44px;
+            padding-bottom: 46px;
+        }
+    </style>
+</head>
+<body>
+    <!--顶部-->
+    <header id="header" class="mui-bar mui-bar-nav">
+            <h1 class="mui-title" style="">社区页</h1>
+            <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+            <span class="mui-icon mui-icon-search mui-pull-right" id="search"></span>
+            <span class=" mui-icon mui-icon-chat mui-pull-right" id="xiaoxi" style="font-size: 21px; margin-right: -4px; margin-top: 2px;"></span>
+
+    </header>
+
+
+    <div class="mui-content">
+        <!--社区条-->
+        <div id="shequTiao" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <div class="mui-scroll">
+                <a class="mui-control-item mui-active">
+                    推荐
+                </a>
+                <a class="mui-control-item">
+                   盆地
+                </a>
+                <a class="mui-control-item">
+                    围绝经
+                </a>
+                <a class="mui-control-item">
+                    AUB
+                </a>
+                <a class="mui-control-item">
+                    乳腺肿瘤
+                </a>
+                <a class="mui-control-item">
+                    女性内分泌
+                </a>
+            </div>
+        </div>
+        <!--社区子项-->
+        <div  id="shequZi" style="display: none" class="mui-scroll-wrapper mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+            <div class="mui-scroll" style="    font-size: 0.7rem;">
+                <a class="mui-control-item mui-active">
+                    <span>盆地</span>医生社区
+                </a>
+                <a class="mui-control-item">
+                    <span>盆地</span>医患社区
+                </a>
+                <a class="mui-control-item">
+                    My<span>盆地</span>社区
+                </a>
+            </div>
+        </div>
+        <!-- 轮播图-->
+        <div id="lunbo" class="mui-slider">
+            <div class="mui-slider-group mui-slider-loop">
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="img/cbd.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+                <div class="mui-slider-item"><a href="#"><img src="img/qiao.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+                <div class="mui-slider-item"><a href="#"><img src="img/tom.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+                <div class="mui-slider-item"><a href="#"><img src="img/home.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+                <div class="mui-slider-item"><a href="#"><img src="img/cbd.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+                <!--支持循环，需要重复图片节点-->
+                <div class="mui-slider-item mui-slider-item-duplicate"><a href="#"><img src="img/qiao.jpg" /></a><p class="mui-slider-title">幸福就是可以一起睡觉</p></div>
+            </div>
+            <div class="mui-slider-indicator mui-text-right">
+                <div class="mui-indicator mui-active"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+                <div class="mui-indicator"></div>
+            </div>
+        </div>
+        <!-- 置顶-->
+        <div id="zhidin">
+            <ul  class="mui-table-view ">
+                <li class="mui-table-view-cell mui-ellipsis " data-type="wenzhang">
+                    <span>置顶</span>
+                    这是一篇这是一篇置顶文章这是一篇置顶文章 这是一篇这是一篇置顶文章这是一篇置顶
+                </li>
+                <li class="mui-table-view-cell  mui-ellipsis" data-type="dongtai">
+                    <span>置顶</span>
+                    这是一篇这是一篇置顶文章这是一篇置顶文章 这是一篇这是一篇置顶文章这是一篇置顶文...
+                </li>
+                <li class="mui-table-view-cell mui-ellipsis" data-type="dongtai">
+                    <span>置顶</span>
+                    这是一篇这是一篇置顶文章这是一篇置顶文章 这是一篇这是一篇置顶文章这是一篇置顶文...
+                </li>
+            </ul>
+
+
+
+        </div>
+        <!-- 文章列表-->
+        <div id="articleList">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell mui-media" data-type="wenzhang">
+                    <a href="javascript:;">
+                        <img class="mui-media-object mui-pull-left" src="img/home.jpg">
+                        <div class="mui-media-body">
+                            <p style="height: 45px;overflow: hidden">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                            <p class="mui-ellipsis" style="text-align: right;padding-right: 3px">2分钟前 <span style="color: orange;">张三</span></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media" data-type="wenzhang">
+                    <a href="javascript:;">
+                        <img class="mui-media-object mui-pull-left" src="img/home.jpg">
+                        <div class="mui-media-body">
+                            <p style="height: 45px;overflow: hidden">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                            <p class="mui-ellipsis" style="text-align: right;padding-right: 3px">2分钟前 <span style="color: orange;">张三</span></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media" data-type="dongtai">
+                    <a href="javascript:;">
+                        <div class="mui-media-body">
+                            <p style="height: 45px;overflow: hidden">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                            <p class="mui-ellipsis" style="text-align: right;padding-right: 3px">2分钟前 <span style="color: orange;">张三</span></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media" data-type="dongtai">
+                    <a href="javascript:;">
+                        <div class="mui-media-body">
+                            <p style="height: 45px;overflow: hidden">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                            <p class="mui-ellipsis" style="text-align: right;padding-right: 3px">2分钟前 <span style="color: orange;">张三</span></p>
+                        </div>
+                    </a>
+                </li>
+                <li class="mui-table-view-cell mui-media" data-type="vedio">
+                    <a href="javascript:;">
+                        <img class="mui-media-object mui-pull-left" src="img/video_img.png">
+                        <div class="mui-media-body">
+                            <p style="height: 45px;overflow: hidden">能和心爱的人一起睡觉，是件幸福的事情；可是，打呼噜怎么办？啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+                            <p class="mui-ellipsis" style="text-align: right;padding-right: 3px">2分钟前 <span style="color: orange;">张三</span></p>
+                        </div>
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+</body>
+<script>
+    mui.init({});
+    //获得slider插件对象
+
+    if( ($("#shequTiao .mui-active")[0].innerHTML).toString().trim()!="推荐"){
+        $("#shequZi").show();
+    }
+    mui("#lunbo").slider({
+        interval:5000//自动轮播周期，若为0则不自动播放，默认为0；
+    });
+    mui("#shequTiao").on("tap","a",function(){
+        var name=($(this)[0].innerHTML).toString().trim();
+        $(this).scrollLeft();
+
+          if(name=="推荐"){
+              $("#shequZi").hide();
+          }else{
+              $("#shequZi span").each(function(){
+                  $(this)[0].innerHTML=name;
+              });
+              $("#shequZi").show();
+          }
+    });
+    mui("#xiaoxi")[0].addEventListener("tap",function(){
+            mui.openWindow({
+                url:"消息.html"
+            })
+    })
+    mui("#search")[0].addEventListener("tap",function(){
+        mui.openWindow({
+            url:"社区内部搜索.html"
+        })
+    })
+
+//    mui("#zhidin").on("tap","li",function(){
+//        mui.openWindow({
+//            url:"动态详情.html"
+//        });
+//    })
+
+    mui("#articleList,#zhidin").on("tap","li",function(){
+        var type=$(this).attr("data-type");
+       if(type=="vedio"){
+            mui.openWindow({
+                url:"视频页.html"
+            });
+       }else if(type=="wenzhang"){
+           mui.openWindow({
+               url:"文章详情.html"
+           });
+       }else{
+           mui.openWindow({
+               url:"动态详情.html"
+           });
+       }
+
+    })
+</script>
+</html>

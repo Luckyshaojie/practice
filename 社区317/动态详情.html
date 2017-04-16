@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--ios中是否隐藏状态栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--ios中 顶部nav的样式 为黑色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>详情</title>
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.min.css">
+    <!--MUI扩展图标库-->
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <!--Jq框架-->
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <!--标准MUIJS库-->
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <!--图片预览js库-->
+    <script type="text/javascript" src="js/mui.zoom.js"></script>
+    <script type="text/javascript" src="js/mui.previewimage.js"></script>
+
+    <style>
+        *{
+            font-family: '微软雅黑';
+        }
+        .mui-table-view .mui-media-object {
+            line-height: 30px;
+            max-width: 42px;
+            height: 30px;
+            margin-top: 5px;
+            -webkit-border-radius: 100%;
+            -moz-border-radius: 100%;
+            border-radius: 100%;
+        }
+        .mui-ellipsis {
+            overflow: hidden;
+            white-space: pre-line;
+            text-overflow: ellipsis;
+        }
+        #header h1{
+            text-align: left;
+        }
+        body,.mui-content{
+            background-color: #fff;
+        }
+        #content>div{
+            margin-top: 10px;
+        }
+        #pl{
+            position: relative;
+            margin-top: 20px;
+        }
+        #upImg{
+            position: absolute;
+            width: 30px;
+            top: -19px;
+            margin-left: 5%;
+        }
+        #pl  ul li{
+            position: relative;
+            cursor: pointer;
+        }
+        @media screen and (min-width:320px) and (max-width:374px) {
+            #userText{
+                padding-left: 5px;
+            }
+            #userImg>img{
+                width: 80%;
+                margin-left: 14%;
+                margin-top: 10px;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+            }
+            #userText>p:nth-child(1){
+                margin-top: 10px;
+                font-size: 14px;
+                color: #1e67b6;
+            }
+            #text{
+                font-size: 15px;
+                margin-top: -7px;
+            }
+            #PlZanDate{
+                font-size: 12px;
+                color: gray;
+                position: relative;
+            }
+            #PlZanDate{
+                font-size: 14px;
+                color: gray;
+                position: relative;
+            }
+            #PlZanDate #plzan{
+                position: absolute;
+                right: 6%;
+                font-size: 18px;
+            }
+            #imgList img{
+                width: 29%;
+                margin-right: 2%;
+                margin-top: 1rem;
+                height: 50px;
+            }
+            #content>div{
+                margin-top: 10px;
+            }
+            .userName{
+                color: #1e67b6;
+                font-size: 13px;
+            }
+            .pltime{
+                font-size: 12px;
+                position: absolute;
+                right: 6%;
+                color: #999;
+            }
+            #shequName{
+                 margin-bottom: 0px;
+                 color: #1e67b6;
+                 font-size: 12px;
+             }
+            #plTab{
+                position: absolute;
+                right: 45px;
+                height: 30px;
+                line-height: 25px;
+                display: block;
+                top: -5px;
+                border-radius: 3px;
+                /* border: 1px solid red; */
+
+                font-size: 13px;
+                background: grey;
+                color: #fff;
+                width: 40%;text-align: center;
+            }
+            #zanBtn{
+                display: inline-block;
+                width:49%;
+                padding: 3px 5px;
+            }
+            #plBtn{
+                display: inline-block;
+                width: 45%;
+                padding: 3px 5px;
+            }
+        }
+        @media screen and (min-width:375px) and (max-width:2000px) {
+            #userImg>img{
+                width: 80%;
+                margin-left: 14%;
+                margin-top: 10px;
+                -webkit-border-radius: 100%;
+                -moz-border-radius: 100%;
+                border-radius: 100%;
+              
+            }
+            #userText>p:nth-child(1){
+                margin-top: 10px;
+                font-size: 18px;
+                color: #1e67b6;
+            }
+            #PlZanDate{
+                font-size: 14px;
+                color: gray;
+                position: relative;
+            }
+            #PlZanDate #plzan{
+                position: absolute;
+                right: 6%;
+            }
+            #imgList img{
+                width: 29%;
+                margin-right: 2%;
+                margin-top: 1rem;
+                height: 60px;
+            }
+            .userName{
+                color: #1e67b6;
+                font-size: 15px;
+            }
+            .pltime{
+                font-size: 13px;
+                position: absolute;
+                right:4%;
+                color: #999;
+            }
+            #shequName{
+                margin-bottom: 0px;
+                color: #1e67b6;
+                font-size: 12px;
+            }
+            #plTab{
+                position: absolute;
+                right: 59px;
+                display: block;
+                top: -5px;
+                border-radius: 3px;
+                font-size: 13px;
+                background: grey;
+                color: #fff;
+                width: 40%;
+                height: 31px;
+                line-height: 23px;
+            }
+            #zanBtn{
+                display: inline-block;
+                width: 47%;
+                padding: 4px 5px;
+                text-align:center;
+            }
+            #plBtn{
+                display: inline-block;
+                width: 47%;
+                padding: 4px 5px;
+                text-align:center;
+            }
+        }
+        
+        #tanchuang{
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 170px;
+            background-color: #fff;
+            z-index: 999;
+            padding-top: 1rem;
+            margin-top: -170px;
+            -moz-transition:all 0.3s; /* Firefox 4 */
+            -webkit-transition:all 0.3s; /* Safari and Chrome */
+            -o-transition:all 0.3s; /* Opera */
+        }
+        #tanchuang textarea{
+            width:90%;
+            margin-left: 5%;
+            height: 100px;
+        }
+        #tanchuang button{
+            margin-right: 5%;
+        }
+        .mui-popup-buttons>span:nth-child(2){
+            color: red;
+            font-weight: 500;
+        }
+        .mui-toast-message{
+            background-color: rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+    </style>
+    <!--图片预览的css-->
+    <style type="text/css">
+        .mui-preview-image.mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: #000;
+        }
+        .mui-preview-header,
+        .mui-preview-footer {
+            position: absolute;
+            width: 100%;
+            left: 0;
+            z-index: 10;
+        }
+        .mui-preview-header {
+            height: 44px;
+            top: 0;
+        }
+        .mui-preview-footer {
+            height: 50px;
+            bottom: 0px;
+        }
+        .mui-preview-header .mui-preview-indicator {
+            display: block;
+            line-height: 25px;
+            color: #fff;
+            text-align: center;
+            margin: 15px auto 4px;
+            width: 70px;
+            background-color: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            font-size: 16px;
+        }
+        .mui-preview-image {
+            display: none;
+            -webkit-animation-duration: 0.5s;
+            animation-duration: 0.5s;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+        }
+        .mui-preview-image.mui-preview-in {
+            -webkit-animation-name: fadeIn;
+            animation-name: fadeIn;
+        }
+        .mui-preview-image.mui-preview-out {
+            background: none;
+            -webkit-animation-name: fadeOut;
+            animation-name: fadeOut;
+        }
+        .mui-preview-image.mui-preview-out .mui-preview-header,
+        .mui-preview-image.mui-preview-out .mui-preview-footer {
+            display: none;
+        }
+        .mui-zoom-scroller {
+            position: absolute;
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            -webkit-backface-visibility: hidden;
+        }
+        .mui-zoom {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+        .mui-slider .mui-slider-group .mui-slider-item img {
+            width: auto;
+            height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .mui-android-4-1 .mui-slider .mui-slider-group .mui-slider-item img {
+            width: 100%;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-slider-group .mui-slider-item {
+            display: inline-table;
+        }
+        .mui-android-4-1 .mui-slider.mui-preview-image .mui-zoom-scroller img {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .mui-preview-loading {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: none;
+        }
+        .mui-preview-loading.mui-active {
+            display: block;
+        }
+        .mui-preview-loading .mui-spinner-white {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -25px;
+            margin-top: -25px;
+            height: 50px;
+            width: 50px;
+        }
+        .mui-preview-image img.mui-transitioning {
+            -webkit-transition: -webkit-transform 0.5s ease, opacity 0.5s ease;
+            transition: transform 0.5s ease, opacity 0.5s ease;
+        }
+        .mui-preview-image.mui-fullscreen {
+            position: fixed;
+            z-index: 20;
+            background-color: rgba(0,0,0,0.8);
+        }
+        @-webkit-keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        @-webkit-keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+        @keyframes fadeOut {
+            0% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header id="header" style="position: fixed; top: 0;"  class="mui-bar mui-bar-nav">
+        <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+        <h1 class="mui-title">详情</h1>
+    </header>
+    <!--发表的动态-->
+    <div class="mui-content" id="content">
+            <div class="mui-row">
+                    <div class="mui-col-xs-2" id="userImg">
+                        <img src="img/userImg.jpg" alt=""/>
+                    </div>
+                    <div class="mui-col-xs-10" id="userText">
+                            <p id="userName">韩宝三</p>
+                            <div id="text">
+                                    幸福来的就是这么突然！！！
+                            </div>
+                            <div id="imgList">
+                                <img src="img/sq_bg_img1.png" alt="" data-preview-src="" data-preview-group="1"/>
+                                <img src="img/sq_bg_img1.png" alt="" data-preview-src="" data-preview-group="1"/>
+                                <img src="img/sq_bg_img1.png" alt="" data-preview-src="" data-preview-group="1"/>
+                            </div>
+                             <p id="shequName" style="margin-bottom: 0px">美丽同行·社区</p>
+                            <div id="PlZanDate">
+                                <span id="textDate" style="font-size: 12px;">2017年 1月2日 12:33</span>
+                                <span id="plTab" style="display: none">
+                                    <span id="zanBtn" data-state="no">赞</span>
+                                    <span  id="plBtn">评论</span>
+                                </span>
+                                <span class="mui-icon-extra mui-icon-extra-comment" id="plzan"></span>
+                            </div>
+                    </div>
+
+            </div>
+    </div>
+    <!--评论区-->
+    <div id="pl">
+        <img src="img/sq_sanjiaotop.png" alt="" id="upImg"/>
+        <div class="mui-card" style="margin-bottom: 35px;">
+            <ul class="mui-table-view pllsit" style="background-color:#e6e6e6" >
+                <div id="dianzanList">
+                    <!--点赞人-->
+                    <li class="mui-table-view-cell" id="zanlist">
+                        <span class="mui-icon-extra mui-icon-extra-heart" style="vertical-align: middle;color: #3c7abd;"></span>
+                    </li>
+                </div>
+                <div id="userPL">
+
+                </div>
+
+            </ul>
+
+        </div>
+    </div>
+    <!--弹框-->
+    <div id="tanchuang" style="">
+            <textarea rows="3" cols="20" placeholder="回复张三:" id="plBox"></textarea>
+            <div style="text-align:center;margin-top: -7px ">
+                <button type="button" class="mui-btn  quxiao" style="    color: #999;">取消</button>
+                <button type="button"  class="mui-btn mui-btn-success huifu">回复</button>
+            </div>
+    </div>
+</body>
+<script>
+    /*图片预览初始化函数*/
+    mui.previewImage();
+    /*点赞按钮 点击事件*/
+    $("#pl>img:eq(0)").hide();
+    $("#dianzanList").hide();
+    $("#userPL").hide();
+    mui("#content").on("tap","#userName",function(){
+                mui.openWindow({
+                        url:"个人主页.html"
+                });
+
+    })
+    mui("#content").on("tap","#userImg",function(){
+        mui.openWindow({
+            url:"个人主页.html"
+        });
+
+    })
+    mui('#content').on('tap','#zanBtn',function(){
+        $("#plTab").css("display","none");
+        if($("#zanBtn").attr("data-state")=="no"){
+            $("#pl>img:eq(0)").show();
+            $("#dianzanList").show();
+            $("#zanBtn").text("取消赞");
+            $("#zanBtn").attr("data-state","ok");
+            /*判断当前点赞用户是否为第一个用户*/
+            if($("#zanlist span").length==1){
+                $("#zanlist").append("<span class='userName' data-uid='102'>当前用户名</span>")
+            }else{
+                $("#zanlist").append("<span class='userName' data-uid='102'>、当前用户名</span>")
+            }
+
+        }else{
+            $("#pl>img:eq(0)").hide();
+            $("#dianzanList").hide();
+            if($("#userPL").css("display")!="none"){
+                $("#pl>img:eq(0)").show();
+            }
+            $("#zanBtn").text("赞");
+            $("#zanBtn").attr("data-state","no");
+           $("#zanlist span").each(function(e){
+               /*第一个元素不是点赞用户列表*/
+                if(e!="0"){
+                   if($(this).attr("data-uid")=="102"){
+                       /*删除当前元素*/
+                        $(this).remove();
+                       return false;
+                   }
+                }
+           })
+
+        }
+    });
+    /*评论按钮 点击事件*/
+    mui('#content').on('tap','#plBtn',function(){
+        var thisDom =$(this);
+        /*当前点击是否是自己所说的*/
+        $("#tanchuang").css("margin-top","0px");
+        var  username="评论:";
+        $("#plBox").attr("placeholder",username);
+        $("#plTab").css("display","none");
+        mask.show();
+        /*解除回复按钮的点击事件*/
+        mui("#tanchuang").off("tap");
+        /*附加回复按钮的点击事件*/
+        $(".huifu").html("评论");
+        addpinglun(thisDom);
+        addquxiao();
+    });
+    /*初始化蒙版 */
+    var mask = mui.createMask(function(){
+            /*关闭蒙版时函数*/
+        $("#tanchuang").css("margin-top","-170px");
+    });//callback为用户点击蒙版时自动执行的回调；
+    addclickpl();
+    function addclickpl(){
+        mui("#userPL").on("tap","li",function(){
+            var thisDom =$(this);
+            /*当前点击是否是自己所说的*/
+            console.log($(this).find(".userName").html());
+            console.log($("#userName").html());
+            if($(this).find(".userName").html()==$("#userName").html()){
+                mui.confirm("你是要删除你的评论吗？",'提示',['取消','确认'],function(e){
+                    if(e.index=="1"){
+                        $(thisDom).remove();
+                        mui.toast("删除成功！");
+                    }
+                });
+                return false;
+            }
+            $("#tanchuang").css("margin-top","0px");
+            console.log();
+            var  username="回复"+$(this).find(".userName")[0].innerHTML+":";
+            $("#plBox").attr("placeholder",username);
+            mask.show();
+            /*解除回复按钮的点击事件*/
+            mui("#tanchuang").off("tap");
+            /*附加回复按钮的点击事件*/
+            $(".huifu").html("回复");
+            addhuifu(thisDom);
+            /*绑定回复框的取消事件*/
+            addquxiao();
+
+        })
+    }
+
+    function addquxiao(){
+        mui("#tanchuang").on("tap",".quxiao",function(){
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mask.close();
+        });
+    }
+    /*回复按钮事件*/
+    function addhuifu(thisDom){
+        mui("#tanchuang").on("tap",".huifu",function(){
+            if( $("#plBox").val().toString().trim()==""){
+                mui.alert("回复失败！  原因：回复的内容为空！");
+                 $("#tanchuang").css("margin-top","-170px");
+                mask.close();
+                return;
+            };
+            $(thisDom).after("<li class='mui-table-view-cell mui-media'>"+
+            "<img class='mui-media-object mui-pull-left plheadimg' src='img/userImg.jpg'>"+
+             "<div class='mui-media-body'>"+
+             "<span class='userName'>"+$("#userName").html()+"</span> 回复"+
+             "<span class='userName'>"+$(thisDom).find(".userName")[0].innerHTML+"</span>"+
+             "<span class='pltime' >"+getDate()+"</span>"+
+            "<p class='mui-ellipsis'>"+$('#plBox').val()+"</p></div></li>");
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mask.close();
+
+        });
+    }
+    /*评论按钮事件*/
+    function addpinglun(thisDom){
+        mui("#tanchuang").on("tap",".huifu",function(){
+            if( $("#plBox").val().toString().trim()==""){
+                mui.alert("评论失败！  原因评论的内容为空！");
+                $("#tanchuang").css("margin-top","-170px");
+                mask.close();
+                return;
+            };
+
+
+            $("#userPL").append("<li class='mui-table-view-cell mui-media'>"+
+                    " <img class='mui-media-object mui-pull-left plheadimg' src='img/userImg.jpg'>"+
+                    "<div class='mui-media-body'>"+
+                    "<span class='userName'>幸福</span>"+
+                    "<span class='pltime' >"+getDate()+"</span>"+
+                    "<p class='mui-ellipsis'>"+$('#plBox').val()+"</p></div></li>");
+            $("#tanchuang").css("margin-top","-170px");
+            $('#plBox').val("");
+            mui.toast("评论成功");
+            $("#pl>img:eq(0)").show();
+
+            $("#userPL").show();
+            mask.close();
+        });
+    }
+    function getDate(){
+        var mydate = new Date();
+        var time= mydate.getFullYear()+"年"+(mydate.getMonth()+1)+"月" +mydate.getDate()+"日 "; //获取当前日(1-31)
+        time+= mydate.getHours()+":"; //获取当前小时数(0-23)
+        time+=(mydate.getMinutes().length!=1?mydate.getMinutes():"0"+mydate.getMinutes())+""; //获取当前分钟数(0-59)
+
+        return time;
+
+    }
+    mui("#userText").on("tap",'#plzan',function(){
+        if($("#plTab").css("display")=="none"){
+            $("#plTab").css("display","block");
+        }else{
+            $("#plTab").css("display","none");
+        }
+
+    })
+
+
+
+
+</script>
+</html>

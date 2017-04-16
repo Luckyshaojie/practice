@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!--兼容IE-Edge-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!--保持与当前窗口一样的大小-->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--ios中是否隐藏状态栏-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!--ios中 顶部nav的样式 为黑色-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta charset="UTF-8">
+    <title>我的收藏</title>
+    <!--标准mui.css-->
+    <link rel="stylesheet" href="css/mui.css">
+    <!--MUI扩展图标库-->
+    <link rel="stylesheet" href="css/mui-icon-extra.css"/>
+    <!--Jq框架-->
+    <script  type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+    <!--标准MUIJS库-->
+    <script  type="text/javascript" src="js/mui.min.js"></script>
+    <style>
+        *{
+            font-family: '微软雅黑';
+        }
+        #header h1{
+            text-align: left;
+        }
+        .mui-table-view{
+            margin-top: 3px;
+        }
+
+        @media screen and (min-width:320px) and (max-width:374px) {
+            .textImg{
+                padding: 7px 10px;
+                margin-top: 5px;
+
+            }
+            .scImg img{
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+            .content{
+                font-size: 14px;
+                height: 41px;
+                overflow: hidden;
+                padding-left: 5px;
+            }
+            .tI{
+                background-color: #f7f7f7;
+                padding: 5px;
+                margin-top: -10px;
+            }
+            .tI h6{
+                padding-left: 5px;
+                margin-top: -5px;
+
+            }
+            .textDate{
+                font-weight: 500;
+                font-size: 20px;
+            }
+            .list{
+                margin-top: 10px;
+            }
+        }
+        @media screen and (min-width:375px) and (max-width:2000px) {
+            .textImg{
+                padding: 7px 10px;
+                margin-top: 5px;
+
+            }
+            .scImg img{
+                width: 60px;
+                height: 60px;
+                margin-right: 10px;
+            }
+            .content{
+                font-size: 15px;
+                height: 41px;
+                overflow: hidden;
+                padding-left: 5px;
+            }
+            .tI{
+                background-color: #f7f7f7;
+                padding: 5px;
+                margin-top: -10px;
+            }
+            .tI h6{
+                padding-left: 5px;
+                margin-top: -5px;
+                font-size: 14px;
+
+            }
+            .textDate{
+                font-weight: 500;
+                font-size: 20px;
+            }
+            .list{
+                margin-top: 10px;
+            }
+        }
+        .mui-card{
+            margin: 8px 0;
+            box-shadow: 0 0 0;
+        }
+        .mui-card-header:after, .mui-card-footer:before{
+            background-color: transparent;
+        }
+        .no-tital-p{
+            word-break: break-all;
+            height: 100%;
+            overflow: hidden;
+        }
+        .mui-card-content img{
+            height:100%;
+        }
+        .align-center{
+            text-align: center;
+        }
+        .align-center img{
+            height: 66px;
+            width: 66px;
+        }
+        .mui-card-content .mui-col-xs-3,.mui-card-content .mui-col-xs-9{
+            height: 66px;
+        }
+        .shequ-tip{
+            padding-left: 10px;
+            color: #9ee1e8;
+        }
+        /*.mui-card-header img{
+            border-radius: 50%;
+        }*/
+    </style>
+</head>
+<body>
+<header id="header" class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">浏览历史</h1>
+</header>
+
+<div class="mui-content">
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-3 align-center">
+                <img src="img/sq_bg_img4.png">
+            </div>
+            <div class="mui-col-xs-9">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-12">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-12">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-3 align-center">
+                <img src="img/sq_bg_img4.png">
+            </div>
+            <div class="mui-col-xs-9">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-3 align-center">
+                <img src="img/sq_bg_img4.png">
+            </div>
+            <div class="mui-col-xs-9">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+    <div class="mui-card">
+        <div class="mui-card-header mui-card-media">
+            <img src="img/sq_head_img2.png" />
+            <div class="mui-media-body">
+                小M
+                <p>发表于<span>2016-06-30 15:30</span><span class="shequ-tip">乳腺癌社区</span></p>
+            </div>
+        </div>
+        <div class="mui-card-content mui-row" style="padding: 10px;">
+            <div class="mui-col-xs-3 align-center">
+                <img src="img/sq_bg_img4.png">
+            </div>
+            <div class="mui-col-xs-9">
+                <p class='no-tital-p'>sdsdsdasdadasdadadsadaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaadwwwwwwwwwwwwwggggggggggggggggg</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!doctype html>
+<html style="background-color: white;">
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/mui.picker.min.css"/>
+		<script src="js/mui.min.js"></script>
+		<script src="js/mui.picker.min.js"></script>
+		<script src="js/jquery-1.8.3.min.js"></script>
+	</head>
+	<style type="text/css">	
+		#showPicture
+		{
+			border: 1px solid lightgray;
+			height:8rem;
+			border-radius: 6px;
+		}	
+	</style>
+	<body>
+		<header style="background-color: #0066FE;" class="mui-bar mui-bar-nav">
+	    <a id="back" style="color: white;" class="mui-icon mui-icon-back mui-icon-left-nav mui-pull-left"></a>
+	    <h1 style="color: white;font-size:1.2rem;font-weight: bold;" class="mui-title">发动态</h1>
+	<!--	<span id="fabu" style="float: right;margin-top: 0.6rem;"><img src="img/上传2.png" alt="" /></span>-->
+		<span id="fabu" style="float: right;color: white;" class="mui-icon mui-icon-upload"></span>
+	  </header>	
+	<div style=" background-color: white;" class="mui-content">		
+	<div style="padding: 2em 2em 0em 2em;">
+		<!--<div id="showTitle" style="display: none;">
+				<input type="text" placeholder="请输入标题...";autofocus="autofocus"; onfocus="this.placeholder=''"; onblur="this.placeholder='请输入标题...'" />
+		</div>-->
+		<textarea rows="8"></textarea>
+	</div>
+	<div id="showPicture" style="display: none;margin: 1em 2em 0 2em;">
+				<a style="text-decoration: none;margin: 0.2rem;" href="#sheet"><span class="mui-icon mui-icon-camera"></span></a>
+		</div>
+			<div id="sheet" class="mui-popover mui-popover-bottom mui-popover-action ">
+			    <!-- 可选择菜单 -->
+			    <ul class="mui-table-view">
+			    	<li class="mui-table-view-cell">
+			        <a style="font-size:13px;color: gray;" href="#">修改用户头像</a>
+			      </li>
+			      <li class="mui-table-view-cell">
+			        <a href="#">拍照</a>
+			      </li>
+			      <li class="mui-table-view-cell">
+			        <a href="#">从手机相册选择</a>
+			      </li>
+			    </ul>
+			    <!-- 取消菜单 -->
+			    <ul class="mui-table-view">
+			      <li class="mui-table-view-cell">
+			        <a href="发文.html"><b>取消</b></a>
+			      </li>
+			    </ul>
+	</div>
+	<footer style="margin:1rem 1rem 2.3rem 2.3rem;">	
+			<span style="" class="footPicure mui-icon mui-icon-camera"><span style="font-weight:bold; margin-bottom:1rem;font-size:15px;color: gray;">插入图片</span></span>
+			<!--<span class="footText mui-icon mui-icon-compose"><span style="font-weight:bold;margin-bottom:1rem;font-size:15px;color: gray;">添加标题</span>	</span>	-->
+	</footer>
+</div>
+
+		<script type="text/javascript">
+			mui.init()
+			/*$(".footText").click(function(){
+				$("#showTitle").show();	
+			})*/
+			$(".footPicure").click(function(){
+				$("#showPicture").toggle();
+			})
+			$("#fabu").click(function(){
+				mui.confirm("确认发布？");
+			})
+			$("#back").click(function(){
+				mui.confirm("文章是否保存？","",["是","否"],function(e){
+					if(e.index==0)
+					{
+						console.log("已保存到草稿箱");
+					}else
+					{
+						mui.back();
+						console.log("未保存");
+					}		
+				})			
+			})
+			
+		</script>
+		
+
+	</body>
+
+</html>
