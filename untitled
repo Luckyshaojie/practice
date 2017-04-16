@@ -1,2 +1,11 @@
-啊啊啊啊啊啊啊啊啊啊啊啊啊
-bbbb
+pwd :用于显示当前目录。
+
+git add：提交的文件。
+
+git commit:提交。
+
+git status：仓库当前的状态。
+
+git hist：查看修改历史记录。
+
+git checkout - 版本：指定回到那个版本。
