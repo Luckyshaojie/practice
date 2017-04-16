@@ -9,3 +9,5 @@ git status：仓库当前的状态。
 git hist：查看修改历史记录。
 
 git checkout - 版本：指定回到那个版本。
+
+git diff
